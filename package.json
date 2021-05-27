@@ -144,7 +144,7 @@
     "raw-loader": "^0.5.1",
     "rimraf": "^2.6.2",
     "routable": "0.0.5",
-    "sanitize-html": "^1.14.1",
+    "sanitize-html": "^2.3.2",
     "sass-loader": "^6.0.6",
     "set-dom": "^7.4.5",
     "snarkdown": "^1.2.2",
