@@ -1,7 +1,8 @@
 ---
-id: editing_components
+id: version-8.6.0-editing-components
 title: Editing Components
 sidebar_label: Editing Components
+original_id: editing-components
 ---
 
 ---
@@ -115,7 +116,7 @@ Inline WYSIWYG fields can accomplish a lot, but not every bit of data in a compo
 
 ![overlay form](/clay-kiln/img/overlay_form.png)
 
-Any fields and groups that aren't inline WYSIWYG inputs will display in overlays. Kiln provides an [ever-growing variety of fields](input.md) that can be used to edit almost any kind of data you desire. To open these forms, add a `data-editable` attribute on the relevant element and point it to a field or group.
+Any fields and groups that aren't inline WYSIWYG inputs will display in overlays. Kiln provides an [ever-growing variety of fields](inputs.md) that can be used to edit almost any kind of data you desire. To open these forms, add a `data-editable` attribute on the relevant element and point it to a field or group.
 
 ```handlebars
 <div data-editable="myField"></div>
@@ -206,7 +207,7 @@ _groups:
 ![setting form](/clay-kiln/img/settings_form.png)
 
 >#### Head and Invisible Component Settings
->Components in `<head>` or invisible lists must have _all_ of their fields available in settings forms, as they don't have any visible elements that can be clicked. The settings forms are accessible from the [Find on Page drawer](manipulating_components#head-lists)
+>Components in `<head>` or invisible lists must have _all_ of their fields available in settings forms, as they don't have any visible elements that can be clicked. The settings forms are accessible from the [Find on Page drawer](manipulating-components#head-lists)
 
 Settings forms are useful for `<head>` and invisible components, as well as _optional_ fields that aren't frequently accessed. They're also useful to provide manual fallbacks for automatic component logic, such as fields that are generated in `model.js` files.
 
@@ -280,7 +281,7 @@ In this example, the _Original Article URL_ field would only be displayed if the
 * **value** - optional value to compare against, when you want to compare against a single value
 * **values** - array of optional values to compare against, when you want to compare against multiple values
 
-If neither `operator`, `value`, nor `values` are specified, the field will be shown when the compared field has any data (the same as the `not-empty` operator). The syntax for comparing against sites is the same as [site-specific components in lists](manipulating_components#site-specific-components).
+If neither `operator`, `value`, nor `values` are specified, the field will be shown when the compared field has any data (the same as the `not-empty` operator). The syntax for comparing against sites is the same as [site-specific components in lists](manipulating-components#site-specific-components).
 
 When comparing against multiple `values`, the comparison will be true if at least one of the values matches.
 
@@ -384,7 +385,7 @@ caption:
       property: metadata.caption
 ```
 
-For more information about `magic-button`, [please see its specific documentation](input.md#magic-button).
+For more information about `magic-button`, [please see its specific documentation](inputs.md#magic-button).
 
 >#### Multiple Attached Buttons
 >Inputs may include multiple attached buttons, but be warned that this does take up horizontal space from the main input. For this reason, more than two attached buttons on a single input is not recommended.

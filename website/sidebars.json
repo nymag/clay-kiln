@@ -1,38 +1,39 @@
 {
   "docs": {
     "Introduction": [
-      "intro"
+      "introduction"
     ],
     "KILN FUNDAMENTALS": [
-      "kiln_ui",
+      "kiln-ui",
       {
         "type": "subcategory",
         "label": "Clay Components",
         "ids": [
-          "component",
-          "manipulating_components",
-          "editing_components",
-          "input",
+          "components",
+          "manipulating-components",
+          "editing-components",
+          "inputs",
           "kilnjs"
         ]
       },
-      "deep_linking",
-      "plugins"
+      "plugins",
+      "deep-linking"
     ],
     "API DOCUMENTATION": [
       {
         "type": "subcategory",
         "label": "Kiln API",
         "ids": [
-          "api_kiln",
+          "api",
           "snackbar",
-          "vuex_actions",
-          "vuex_plugin"
+          "vuex-actions",
+          "vuex-plugin"
         ]
       }
     ],
     "Local Kiln": [
       "local-kiln"
-    ]
+    ],
+    "Helpful Links": ["glossary"]
   }
 }

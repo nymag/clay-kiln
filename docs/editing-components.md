@@ -1,6 +1,14 @@
-# Editing Components
+---
+id: editing-components
+title: Editing Components
+sidebar_label: Editing Components
+---
+
+---
 
 Components are edited through the fields and forms that are declared in their `schema.yml` file. This means that developers have maximum flexibility with the template and styling of their components, but end users get a consistent and manageable editing experience.
+
+---
 
 ## Inline WYSIWYG
 
@@ -17,23 +25,19 @@ title:
 
 When someone clicks the `data-editable` title, it will open an inline WYSIWYG form. The field will inherit styles from your component, for a proper WYSYWIG experience.
 
-![](images/inline_form.png)
+![inline form](/clay-kiln/img/inline_form.png)
 
-{% hint style="info" %}
-
-`data-editable` may reference any field or group of fields, even fields inside of complex lists! This is perfectly valid syntax:
-
-```handlebars
-{{#each hotTopics}}
-  <li data-editable="content.{{@index}}.text">{{ text }}</li>
-{{/each}}
-```
-
-{% endhint %}
+>`data-editable` may reference any field or group of fields, even fields inside of complex lists! This is perfectly valid syntax:
+    ```handlebars
+    {{#each hotTopics}}
+      <li data-editable="content.{{@index}}.text">{{ text }}</li>
+    {{/each}}
+    ```
+---
 
 ## Inline Reordering
 
-Complex-list items can be reordered and deleted inline without opening a settings modal if their template markup allows for it.
+Complex-list items can be reordered and deleted inline without opening a setting modal if their template markup allows for it.
 
 ```yaml
 articles:
@@ -62,9 +66,11 @@ articles:
 The parent element that contains the list items must have a `data-reorderable` attribute where the value is the name of the complex-list field (similar to `data-editable` on inline fields) and a `data-reorderable-prop` attribute where the value is a _unique_ property that all complex-list items have.
 Each list item element should be a direct child of the `data-reorderable` element and should have a `data-reorderable-item` attribute where the value is the value of that item's `data-reorderable-prop` property.
 
+---
+
 ## Placeholders
 
-Placeholders display when fields are empty, and are used to prompt end users to add information. They can be added to any field or group.
+Placeholders display when fields are empty and are used to prompt end users to add information. They can be added to any field or group.
 
 ```yaml
 title:
@@ -76,21 +82,16 @@ title:
 
 The placeholder will display inside of the element with the relevant `data-editable` attribute.
 
-![](images/placeholder.png)
+![placeholder](/clay-kiln/img/placeholder.png)
 
-{% hint style="info" %}
-
-#### Placeholder Heights
-
-The placeholder height specified in the config is the minimum height of the displayed placeholder. The placeholder will be taller if its parent element has an explicitly set height. When deciding what height to set in the config, remember that it should reflect the height of the content that goes in the field.
-
-{% endhint %}
+>#### Placeholder Heights
+>The placeholder height specified in the config is the minimum height of the displayed placeholder. The placeholder will be taller if its parent element has an explicitly set height. When deciding what height to set in the config, remember that it should reflect the height of the content that goes in the field.
 
 ### Permanent Placeholders
 
 If you want to display a placeholder for some field, but don't want to allow users to click into it, use the `data-placeholder` attribute. This is useful for situations where a component doesn't have anything to display in edit mode (like ads), but shouldn't be relegated to an invisible component list (like...ads).
 
-You must also add the `permanent` property to the placeholder config to force the placeholder to always display. Permanent placeholders are styled more subtly than regular placeholders, since end users don't click on them to edit anything.
+You must also add the `permanent` property to the placeholder config to force the placeholder to always display. Permanent placeholders are styled more subtly than regular placeholders since end users don't click on them to edit anything.
 
 ```yaml
 adSizes:
@@ -104,13 +105,15 @@ adSizes:
 
 Placeholders can display the value of a field, which is useful for components not visible during edit mode, e.g. third-party embeds. The syntax for displaying a value in the placeholder text is `${fieldName}`, which is similar to [JavaScript template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). Note that `permanent` must be enabled.
 
-![](images/permanent_placeholder.png)
+![permanent placeholder](/clay-kiln/img/permanent_placeholder.png)
+
+---
 
 ## Editing Components with Forms
 
-Inline WYSIWYG fields can accomplish a lot, but not every bit of data in a component is a string of formatted text. For everything else, there's overlay forms.
+Inline WYSIWYG fields can accomplish a lot, but not every bit of data in a component is a string of formatted text. For everything else, there are overlay forms.
 
-![](images/overlay_form.png)
+![overlay form](/clay-kiln/img/overlay_form.png)
 
 Any fields and groups that aren't inline WYSIWYG inputs will display in overlays. Kiln provides an [ever-growing variety of fields](inputs.md) that can be used to edit almost any kind of data you desire. To open these forms, add a `data-editable` attribute on the relevant element and point it to a field or group.
 
@@ -118,13 +121,13 @@ Any fields and groups that aren't inline WYSIWYG inputs will display in overlays
 <div data-editable="myField"></div>
 ```
 
-Overlay forms frequently consist of a single field. This is a perfectly acceptable user experience, because overlay forms will open where the user clicks.
+Overlay forms frequently consist of a single field. This is a perfectly acceptable user experience because overlay forms will open where the user clicks.
 
-![](images/overlay_form_single_field.png)
+![overlay form single field](/clay-kiln/img/overlay_form_single_field.png)
 
 ### Groups
 
-For forms with multiple fields, those fields must be combined into groups. A group must have a `fields` property, and may have `_label` and `_placeholder` properties.
+For forms with multiple fields, those fields must be combined into groups. A group must have a `fields` property and may have `_label` and `_placeholder` properties.
 
 ```yaml
 title:
@@ -183,13 +186,8 @@ _groups:
       - url
 ```
 
-{% hint style="info" %}
-
-#### Using XOR
-
-Please note that when comparing _more than two fields_, you cannot use `XOR` (as it's logically impossible to XOR more than two boolean values). For `AND`, `OR`, and `XOR` you must also use the same comparator between each field rather than mixing and matching them.
-
-{% endhint %}
+>#### Using XOR
+>Please note that when comparing _more than two fields_, you cannot use `XOR` (as it's logically impossible to XOR more than two boolean values). For `AND`, `OR`, and `XOR` you must also use the same comparator between each field rather than mixing and matching them.
 
 Placeholders in groups may use deep field comparison to calculate emptiness of complex-lists. For example, `ifEmpty: 'byline.names'` will look for emptiness in the prop `names` in all items in the `byline` complex-list. Note that deep field comparison is only supported up to two levels deep, so using `isEmpty: byline.names.text` will throw an error.
 
@@ -205,15 +203,10 @@ _groups:
       - url
 ```
 
-![](images/settings_form.png)
+![setting form](/clay-kiln/img/settings_form.png)
 
-{% hint style="info" %}
-
-#### Head and Invisible Component Settings
-
-Components in `<head>` or invisible lists must have _all_ of their fields available in settings forms, as they don't have any visible elements that can be clicked. The settings forms are accesible from the [Find on Page drawer](manipulating-components.md#head-lists)
-
-{% endhint %}
+>#### Head and Invisible Component Settings
+>Components in `<head>` or invisible lists must have _all_ of their fields available in settings forms, as they don't have any visible elements that can be clicked. The settings forms are accessible from the [Find on Page drawer](manipulating-components#head-lists)
 
 Settings forms are useful for `<head>` and invisible components, as well as _optional_ fields that aren't frequently accessed. They're also useful to provide manual fallbacks for automatic component logic, such as fields that are generated in `model.js` files.
 
@@ -235,7 +228,9 @@ _groups:
 
 If you specify sections for some fields but leave the other fields blank, they'll be added to a _General_ section. Fields and sections will appear in the form in the order they've been listed.
 
-![](images/form_tabs.png)
+![form tabs](/clay-kiln/img/form_tabs.png)
+
+---
 
 ## Field Configuration
 
@@ -277,7 +272,7 @@ syndicationUrl:
     value: copy
 ```
 
-In this example, the _Original Article URL_ field would only be displayed if the _Article Syndication Type_ was set to `copy`, since that would mean the article was being syndicated from some other place. You can compare against other fields or even against the site you're on.
+In this example, the _Original Article URL_ field would only be displayed if the _Article Syndication Type_ was set to `copy` since that would mean the article was being syndicated from some other place. You can compare against other fields or even against the site you're on.
 
 * **field** - to compare against, and/or...
 * **sites** - to compare against (will be true if the current site is one of them)
@@ -285,7 +280,7 @@ In this example, the _Original Article URL_ field would only be displayed if the
 * **value** - optional value to compare against, when you want to compare against a single value
 * **values** - array of optional values to compare against, when you want to compare against multiple values
 
-If neither `operator`, `value`, nor `values` are specified, the field will be shown when the compared field has any data (the same as the `not-empty` operator). The syntax for comparing against sites is the same as [site-specific components in lists](manipulating-components.md#site-specific-components).
+If neither `operator`, `value`, nor `values` are specified, the field will be shown when the compared field has any data (the same as the `not-empty` operator). The syntax for comparing against sites is the same as [site-specific components in lists](manipulating-components#site-specific-components).
 
 When comparing against multiple `values`, the comparison will be true if at least one of the values matches.
 
@@ -307,19 +302,14 @@ When comparing against multiple `values`, the comparison will be true if at leas
 * `truthy` (only checks field data, no value needed)
 * `falsy` (only checks field data, no value needed)
 
-{% hint style="info" %}
-
-#### Deep Field Comparisons
-
-You can compare against deep fields (like `checkbox-group` or `complex-list`) by using dot-separated paths, e.g. `featureTypes.New York Magazine Story`. Don't worry about the spaces, as Kiln will parse it correctly to pull the relevant data. Note that this only works against proper _fields_, not any arbitrary non-kiln property.
-
-{% endhint %}
+>#### Deep Field Comparisons
+>You can compare against deep fields (like `checkbox-group` or `complex-list`) by using dot-separated paths, e.g. `featureTypes.New York Magazine Story`. Don't worry about the spaces, as Kiln will parse it correctly to pull the relevant data. Note that this only works against proper _fields_, not any arbitrary non-kiln property.
 
 ### Standard Input Arguments
 
 Kiln's inputs are highly customized to the type of data they handle, but there are some shared arguments that work with most inputs.
 
-* **help** - description / helper text for the field, which generally appears below it
+* **help** - description/helper text for the field, which generally appears below it
 * **attachedButton** - an icon button that may be attached to the field, to allow additional functionality
 * **validate** - an object that contains pre-publish validation rules:
 
@@ -328,13 +318,8 @@ Kiln's inputs are highly customized to the type of data they handle, but there a
 * **validate.max** - maximum number (for numerical inputs) or length (for text and array inputs) that the field must not exceed
 * **validate.pattern** - regex pattern, for text inputs
 
-{% hint style="info" %}
-
-#### Min and Max Validation
-
-`min` and `max` validation only runs if the field is filled out. This differentiates it from the `required` validation, which specifies that a field _must_ be filled out to be valid. Thus, it is possible to have an optional field that, _if_ it is filled out, must have more/less than _x items_ or a value greater/less than _y_.
-
-{% endhint %}
+>#### Min and Max Validation
+>`min` and `max` validation only run if the field is filled out. This differentiates it from the `required` validation, which specifies that a field _must_ be filled out to be valid. Thus, it is possible to have an optional field that, _if_ it is filled out, must have more/less than _x items_ or a value greater/less than _y_.
 
 Validation rules may also have custom error messages, that will appear in the same place as the help text. If you do not specify a message, default error messages will appear.
 
@@ -356,13 +341,13 @@ adName:
     attachedButton: lock
 ```
 
-![](images/locked_field.png)
+![locked field](/clay-kiln/img/locked_field.png)
 
 Clicking the lock toggles the input between disabled and enabled state.
 
-![](images/unlocked_field.png)
+![unlocked field](/clay-kiln/img/unlocked_field.png)
 
-**Magic Button** is a button that fetches data, allowing quick population of fields based on other fields, other component data, or the result of api calls.
+**Magic Button** is a button that fetches data, allowing a quick population of fields based on other fields, other component data, or the result of api calls.
 
 ```yaml
 # pull short headline from regular headline
@@ -401,20 +386,16 @@ caption:
 
 For more information about `magic-button`, [please see its specific documentation](inputs.md#magic-button).
 
-{% hint style="info" %}
+>#### Multiple Attached Buttons
+>Inputs may include multiple attached buttons, but be warned that this does take up horizontal space from the main input. For this reason, more than two attached buttons on a single input is not recommended.
+    ```
+    attachedButton:
+      - lock
+      - name: magic-button
+        field: title
+    ```
 
-#### Multiple Attached Buttons
-
-Inputs may include multiple attached buttons, but be warned that this does take up horizontal space from the main input. For this reason, more than two attached buttons on a single input is not recommended.
-
-```
-attachedButton:
-  - lock
-  - name: magic-button
-    field: title
-```
-
-{% endhint %}
+---
 
 ## Cross Component Communication
 
@@ -495,10 +476,10 @@ Kiln intelligently prevents a component from publishing more than once during pu
 
 As cross-component updating is a feature of Kiln, it only works client-side. For third-party microservices or manual API calls, please make use of [cascading PUTs](https://github.com/nymag/amphora/pull/73) to affect multiple components.
 
-If you have data you want to propagate when publishing (which happens server-side), have your [publishing service](http://clay.github.io/amphora/docs/basics/publishing.html) add that data to the locals object, which will be passed in to all components' `model.save()` method.
+If you have data you want to propagate when publishing (which happens server-side), have your [publishing service](https://docs.clayplatform.com/amphora/docs/publishing) add that data to the locals object, which will be passed into all components' `model.save()` method.
 
 ### Kiln Subscribers
 
 Kiln itself subscribes to a few specific properties, which it uses to update its index of pages. Publishing to `kilnTitle` will update the page title, and `kilnAuthors` will update the page authors. You can see the results in the Clay Menu.
 
-![](images/clay_menu.png)
+![clay menu](/clay-kiln/img/clay_menu.png)

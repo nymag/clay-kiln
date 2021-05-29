@@ -1,7 +1,8 @@
 ---
-id: manipulating_components
+id: version-8.6.0-manipulating-components
 title: Adding, Removing, and Reordering Components
 sidebar_label: Adding, Removing, and Reordering Components
+original_id: manipulating-components
 ---
 
 ---
@@ -75,7 +76,7 @@ When collapsible lists are empty, they'll display the same "Add Component" butto
 
 #### Validation
 
-Similarly to [editable fields](editing_components.md#standard-input-arguments), component lists may contain validation for `min` and `max` lengths.
+Similarly to [editable fields](editing-components.md#standard-input-arguments), component lists may contain validation for `min` and `max` lengths.
 
 ```yaml
 myList:

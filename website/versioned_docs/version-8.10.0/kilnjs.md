@@ -35,7 +35,7 @@ However, note that the JSON that is returned still needs to conform to the struc
 
 ## KilnInput
 
-The real power of Kiln.js comes from the KilnInput object, which can be used to make the fields within a schema truly dynamic. Using 'KilnInput' you can add events to the different form inputs as detailed on the [Form Inputs page](input). You can also subscribe to Vuex actions as described below.
+The real power of Kiln.js comes from the KilnInput object, which can be used to make the fields within a schema truly dynamic. Using 'KilnInput' you can add events to the different form inputs as detailed on the [Form Inputs page](inputs). You can also subscribe to Vuex actions as described below.
 
 To make a schema field a `KilnInput`, you set it to a new instance of `KilnInput`, passing it to the schema and the name of the field.
 
@@ -53,7 +53,7 @@ module.exports = (schema) => {
 
 ## Events
 
-You can attach events to the schema inputs. The events you can attach vary depending upon the type input. The different events are detailed on the [Form Inputs page](input).
+You can attach events to the schema inputs. The events you can attach vary depending upon the type input. The different events are detailed on the [Form Inputs page](inputs).
 
 * ***on(event, callbackFunction)*** - pass it the event as a string, along with a callback function that is run after the event happens.
 

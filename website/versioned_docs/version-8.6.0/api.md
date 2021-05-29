@@ -1,8 +1,8 @@
 ---
-id: version-8.6.0-api_kiln
+id: version-8.6.0-api
 title: API
 sidebar_label: API
-original_id: api_kiln
+original_id: api
 ---
 ## CSS Classes
 

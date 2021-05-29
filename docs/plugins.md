@@ -111,5 +111,5 @@ In fact, a plugin can be even simpler than either of those and doesn't actually 
 As an example, if the Clear Cache plugin cleared the cache for every page rather than the entered urls, then you could just write a function to clear every cache and call that function upon clicking the Clear Cache button rather than requiring further user input.
 
 **See Also:**
-* [Vuex Actions](vuex_actions)
-* [Vuex Plugins](vuex_plugin)
+* [Vuex Actions](vuex-actions.md)
+* [Vuex Plugins](vuex-plugin.md)

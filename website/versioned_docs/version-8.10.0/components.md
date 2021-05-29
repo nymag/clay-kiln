@@ -1,8 +1,8 @@
 ---
-id: version-8.10.0-component
+id: version-8.10.0-components
 title: Components
 sidebar_label: Components
-original_id: component
+original_id: components
 ---
 ---
 [Components are reusable, configurable, self-contained bits of the web.](https://github.com/nymag/amphora/wiki#clay-is-divided-into-components)

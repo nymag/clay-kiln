@@ -1,8 +1,8 @@
 ---
-id: version-8.6.0-intro
+id: version-8.6.0-introduction
 title: Introduction
 sidebar_label: Introduction
-original_id: intro
+original_id: introduction
 ---
 ---
 

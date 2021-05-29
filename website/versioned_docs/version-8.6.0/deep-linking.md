@@ -1,14 +1,15 @@
 ---
-id: deep_linking
+id: version-8.6.0-deep-linking
 title: Deep Linking
 sidebar_label: Deep Linking
+original_id: deep-linking
 ---
 
 ---
 
 All Kiln Nav Drawers, i.e. the UI elements that slide in from the right and left, can be deep-linked to by manipulating the url hash. All page components and their property modals can also be deep-linked to as the url hash is updated when they are being edited to reflect the name of the component.
 
-The kiln nav drawers, both left and right, are opened with the [openDrawer](vuex_actions.md#module_drawers) function (or the toggleDrawer function which calls [openDrawer](vuex_actions.md#module_drawers) when opening and [closeDrawer](vuex_actions.md#module_drawers) when closing. The [openDrawer](vuex_actions.md#module_drawers) function sets the url hash to the value passed to it. The value can either be a string, indicating the name of the drawer to open; or an object, which includes the name, as well as further properties that can be used to deep-link to content within the drawer, such as to a tab or a specific UI element within the drawer.
+The kiln nav drawers, both left and right are opened with the [openDrawer](vuex-actions.md#module_drawers) function (or the toggleDrawer function which calls [openDrawer](vuex-actions.md#module_drawers) when opening and [closeDrawer](vuex-actions.md#module_drawers) when closing).  The [openDrawer](vuex-actions.md#module_drawers) function sets the url hash to the value passed to it.  The value can either be a string, indicating the name of the drawer to open, or an object, which includes the name, as well as further properties that can be used to deep-link to content within the drawer, such as to a tab or a specific UI element within the drawer.
 
 The hash can contain up to 4 values, each divided by a tilde.  For example: `#kiln~one~two~three~four`. The very first value in the hash, the #kiln~ value indicates that the hash is for a kiln UI element, rather than a page component.  The hash is parsed and stored in the vuex store on pageload. It is stored at store.state.url. That example hash (`#kiln~one~two~three~four`) would be stored like this:
 ```
@@ -20,7 +21,7 @@ url {
 }
 ```
 
-When the hash is present on the initial pageload, and the first hash parameter matches the name of a drawer, that drawer will automatically open. If there are further parameters, it is up to the drawer to react to it. For example: `#kiln~find-on-a-page~visible-components` would open the 'find-on-a-page' drawer, and the 'find-on-a-page' drawer reads the second hash parameter 'visible-components' and makes the tab with that name, the active tab. In the same way that `kiln~find-on-a-page~head-components` would open the 'find-on-a-page' drawer and make the 'head-components' tab, the active tab. The tabs component within the 'find-on-a-page' drawer is also responsible for setting the hash when the user changes tabs.  If the user is on the 'visible-components' tab and then clicks the 'head-components' tab, the url hash changes from `#kiln~find-on-a-page~visible-components` to `kiln~find-on-a-page~head-components`.  To set the hash, the [setHash](vuex_actions.md#module_deep-linking) function is called.
+When the hash is present on the initial pageload, and the first hash parameter matches the name of a drawer, that drawer will automatically open. If there are further parameters, it is up to the drawer to react to it. For example: `#kiln~find-on-a-page~visible-components` would open the 'find-on-a-page' drawer, and the 'find-on-a-page' drawer reads the second hash parameter 'visible-components' and makes the tab with that name, the active tab. In the same way that `kiln~find-on-a-page~head-components` would open the 'find-on-a-page' drawer and make the 'head-components' tab, the active tab. The tabs component within the 'find-on-a-page' drawer is also responsible for setting the hash when the user changes tabs.  If the user is on the 'visible-components' tab and then clicks the 'head-components' tab, the url hash changes from `#kiln~find-on-a-page~visible-components` to `kiln~find-on-a-page~head-components`.  To set the hash, the [setHash](vuex-actions.md#module_deep-linking) function is called.
 
 ---
 

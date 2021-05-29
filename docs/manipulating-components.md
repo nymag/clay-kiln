@@ -1,24 +1,27 @@
-# Manipulating Components
+---
+id: manipulating-components
+title: Adding, Removing, and Reordering Components
+sidebar_label: Adding, Removing, and Reordering Components
+---
 
-![](images/add_component.png)
+---
 
+![add component](/clay-kiln/img/add_component.png)
+
+---
 ## Component Lists
 
 Components are added, removed, and reordered in fields called _component lists_, of which there are **four types**.
 
 ### Basic Lists
 
-Components that contain child component lists need to do two things: Render an _editable_ list in their template, and specify a _config_ in their `schema.yml`.
+Components that contain child component lists need to do two things: Render an _editable_ list in their template and specify a _config_ in their `schema.yml`.
 
 ```handlebars
 <div data-editable="myList">{{> component-list myList }}</div>
 ```
 
-{% hint style="info" %}
-
-You'll notice that `data-editable` is the same attribute used to specify editable fields. The `component-list` handlebars partial comes from [our included library of helpers and partials](https://github.com/clay/handlebars#partials), and renders a list of components with their data. The element with `data-editable` must be the _immediate parent_ of the components in the list.
-
-{% endhint %}
+> You'll notice that `data-editable` is the same attribute used to specify editable fields. The `component-list` handlebars partial comes from [our included library of helpers and partials](https://github.com/clay/handlebars#partials) and renders a list of components with their data. The element with `data-editable` must be the _immediate parent_ of the components in the list.
 
 ```yaml
 myList:
@@ -44,7 +47,7 @@ myList:
       - some-other-component
 ```
 
-![](images/list_placeholder.png)
+![list placeholder](/clay-kiln/img/list_placeholder.png)
 
 #### Collapsible Lists
 
@@ -60,19 +63,19 @@ myList:
     collapse: true
 ```
 
-![](images/list_open.png)
+![list open](/clay-kiln/img/list_open.png)
 
 Collapsible lists will _always_ display their placeholder, as well as an expand/collapse toggle.
 
-![](images/list_collapsed.png)
+![list collapsed](/clay-kiln/img/list_collapsed.png)
 
 When collapsible lists are empty, they'll display the same "Add Component" button as other component lists.
 
-![](images/list_empty.png)
+![list empty](/clay-kiln/img/list_empty.png)
 
 #### Validation
 
-Similarly to [editable fields](https://claycms.gitbooks.io/kiln/editing-components.html#standard-input-arguments), component lists may contain validation for `min` and `max` lengths.
+Similarly to [editable fields](editing-components.md#standard-input-arguments), component lists may contain validation for `min` and `max` lengths.
 
 ```yaml
 myList:
@@ -120,7 +123,7 @@ myList:
 
 Head component lists get added as tabs to the _Find on Page_ drawer in Kiln automatically, allowing them to be edited.
 
-![](images/head_list.png)
+![head list](/clay-kiln/img/head_list.png)
 
 ### Invisible Lists
 
@@ -181,6 +184,8 @@ Meanwhile, the data for component lists inside page data looks like an array of 
 
 Page areas may also have placeholders.
 
+---
+
 ## Site-Specific Components
 
 All types of component lists allow whitelisting of components using the `include` property in the config. You may also specify that components in a list should be included or excluded on a specific site. To do so, add a comma-separated list of sites in parenthesis after the name of the component in the include list:
@@ -197,13 +202,17 @@ content:
       # included sites first, then filter out the excluded.
 ```
 
+---
+
 ## Fuzzy Lists
 
-Additionally, all types of component lists may be set to _fuzzy_. The default `include` list is appropriate for most situations, but there are certain scenarios where you might want to be less strict. For example, the body of an article might be restricted to paragraphs and images 99% of the time, but you still want to allow your interactives team to create one-off components and add them through Kiln's UI.
+Additionally, all types of component lists may be set to _fuzzy_. The default `include` list is appropriate for most situations, but there are certain scenarios where you might want to be less strict. For example, the body of an article might be restricted to paragraphs and images 99% of the time, but you still want to allow your interactive team to create one-off components and add them through Kiln's UI.
 
 You may make any component list _fuzzy_ by adding that property in the config. This will add a _View All Components_ button into the header of the Add Components modal, which will list _all components available in your Clay installation_.
 
-![](images/fuzzy_list.png)
+![fuzzy list](/clay-kiln/img/fuzzy_list.png)
+
+---
 
 ## Component Properties
 
@@ -217,10 +226,6 @@ tags:
       - fancy-tags
 ```
 
-This allows you to swap out different components in a specific place, for example if you have two different tagging components with different styles and functionality. As with component lists, you may include a `_placeholder`. If your component property is editable, the child component's selector will allow you to remove it (and the placeholder that displays will allow you to add it).
+This allows you to swap out different components in a specific place, for example, if you have two different tagging components with different styles and functionality. As with component lists, you may include a `_placeholder`. If your component property is editable, the child component's selector will allow you to remove it (and the placeholder that displays will allow you to add it).
 
-{% hint style="info" %}
-
-Component properties are not allowed in the layout or page data, only in normal components. Because of this, they are also not allowed in the `<head>` of the page.
-
-{% endhint %}
+> Component properties are not allowed in the layout or page data, only in normal components. Because of this, they are also not allowed in the `<head>` of the page.

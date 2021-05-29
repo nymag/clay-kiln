@@ -1,5 +1,8 @@
-# Kiln API
-
+---
+id: api
+title: API
+sidebar_label: API
+---
 ## CSS Classes
 
 Kiln exports a number of CSS classes that may be used by plugins.
@@ -29,7 +32,7 @@ Kiln attaches a `window.kiln` object when it has loaded, which contains utilitie
 
 Property | Description
 -------- | -----------
-`componentModels` | compiled model.js files, used by kiln to save / render components
+`componentModels` | compiled model.js files, used by kiln to save/render components
 `componentTemplates` | compiled handlebars templates, used by kiln to re-render components
 `helpers` | handlebars helper functions. attach custom helpers here
 `inputs` | form inputs, defined by vue components. attach custom inputs and `attachedButton` components here
@@ -37,7 +40,7 @@ Property | Description
 `locals` | object with url and query params as well as site and user data
 `modals` | vue components that may be displayed by calling `store.dispatch('openModal')`
 `plugins` | vuex plugins that are called when kiln loads. may subscribe to state changes
-`preloadData` | read-only composed page data, used to bootstrap kiln on load
+`preloadData` | read-only composed page data used to bootstrap kiln on load
 `preloadSchemas` | read-only object that contains schemas for all loaded components. used to bootstrap kiln
 `selectorButtons` | custom vue components that will be applied to all component selectors
 `toolbarButtons` | custom vue components that will be added to the edit toolbar
@@ -61,17 +64,13 @@ Note that due to the vast difference in functionality and state data between vie
 
 You may add custom validation to `window.kiln.validators`. A validator should export `label`, `description`, `type` (either `error` or `warning`), and a `validate` method. The `validate` method receives the whole page `state`, so validators can be extremely flexible.
 
-Most validators concern themselves with components and/or fields, and should make use of the helper functions in `kiln.utils.validationHelpers` such as `forEachComponent` and `forEachField`. The built-in validators such as [`required`](https://github.com/clay/clay-kiln/blob/master/lib/validators/built-in/required.js) are good examples to work off of.
+Most validators concern themselves with components and/or fields and should make use of the helper functions in `kiln.utils.validationHelpers` such as `forEachComponent` and `forEachField`. The built-in validators such as [`required`](https://github.com/clay/clay-kiln/blob/master/lib/validators/built-in/required.js) are good examples to work off of.
 
 Validators must return an array of errors (or warnings), where each issue includes `uri`, and `field` properties. Optionally, an issue may include `location` (which creates a link to the relevant form) and `preview` (which displays context for an issue).
 
-{% hint style="info" %}
-
-#### Validating The DOM
-
-While validators may do DOM lookups to determine validity, remember that DOM lookups are slow compared to reducing on the `state` object directly. Please keep this in mind when writing validators that only concern themselves with page/component/etc data.
-
-{% endhint %}
+>#### Validating The DOM
+>
+>While validators may do DOM lookups to determine validity, remember that DOM lookups are slow compared to reducing on the `state` object directly. Please keep this in mind when writing validators that only concern themselves with page/component/etc data.
 
 ### Utilities
 

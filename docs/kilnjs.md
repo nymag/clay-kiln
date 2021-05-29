@@ -36,7 +36,7 @@ However, note that the JSON that is returned still needs to conform to the struc
 
 ## KilnInput
 
-The real power of Kilnjs comes from the KilnInput object, which can be used to make the fields within a schema truly dynamic. Using 'KilnInput' you can add events to the different form inputs as detailed on the [Form Inputs page](input). You can also subscribe to Vuex actions as described below.
+The real power of Kilnjs comes from the KilnInput object, which can be used to make the fields within a schema truly dynamic. Using 'KilnInput' you can add events to the different form inputs as detailed on the [Form Inputs page](inputs.md). You can also subscribe to Vuex actions as described below.
 
 To make a schema field a `KilnInput`, you set it to a new instance of `KilnInput`, passing it to the schema and the name of the field.
 
@@ -54,7 +54,7 @@ module.exports = (schema) => {
 
 ## Events
 
-You can attach events to the schema inputs. The events you can attach vary depending upon the type input. The different events are detailed on the [Form Inputs page](input).
+You can attach events to the schema inputs. The events you can attach vary depending upon the type input. The different events are detailed on the [Form Inputs page](inputs.md).
 
 * ***on(event, callbackFunction)*** - pass it the event as a string, along with a callback function that is run after the event happens.
 
@@ -73,7 +73,7 @@ You can attach events to the schema inputs. The events you can attach vary depen
 There are several strategies that can be used to validate fields and forms.
 
 #### Custom validators in the Schema file
-You can simply rely on the current custom validators and use them normally in your schema file.  Kilnjs will not affect their behavior and they will continue to function as normal.
+You can simply rely on the current custom validators and use them normally in your schema file. Kilnjs will not affect their behavior and they will continue to function as normal.
 
 #### Kilnjs schema.validation
 You can combine the power of custom validators with Kilnjs by adding a validation property to the schema that specifies which field should be validated using which custom validator.

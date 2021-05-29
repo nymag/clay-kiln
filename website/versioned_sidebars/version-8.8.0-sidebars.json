@@ -1,18 +1,18 @@
 {
   "version-8.8.0-docs": {
     "Introduction": [
-      "version-8.8.0-intro"
+      "version-8.8.0-introduction"
     ],
     "KILN FUNDAMENTALS": [
-      "version-8.8.0-kiln_ui",
+      "version-8.8.0-kiln-ui",
       {
         "type": "subcategory",
         "label": "Clay Components",
         "ids": [
-          "version-8.8.0-component",
-          "version-8.8.0-manipulating_components",
-          "version-8.8.0-editing_components",
-          "version-8.8.0-input"
+          "version-8.8.0-components",
+          "version-8.8.0-manipulating-components",
+          "version-8.8.0-editing-components",
+          "version-8.8.0-inputs"
         ]
       },
       "version-8.8.0-deep_linking"
@@ -22,10 +22,10 @@
         "type": "subcategory",
         "label": "Kiln API",
         "ids": [
-          "version-8.8.0-api_kiln",
+          "version-8.8.0-api",
           "version-8.8.0-snackbar",
-          "version-8.8.0-vuex_actions",
-          "version-8.8.0-vuex_plugin"
+          "version-8.8.0-vuex-actions",
+          "version-8.8.0-vuex-plugin"
         ]
       }
     ]

@@ -1,1353 +1,1147 @@
+---
+id: vuex-actions
+title: Vuex Actions
+sidebar_label: Vuex Actions
+---
 ## Modules
-
-<dl>
-<dt><a href="#module_component-data">component-data</a></dt>
-<dd></dd>
-<dt><a href="#module_decorators">decorators</a></dt>
-<dd></dd>
-<dt><a href="#module_deep-linking">deep-linking</a></dt>
-<dd></dd>
-<dt><a href="#module_drawers">drawers</a></dt>
-<dd></dd>
-<dt><a href="#module_forms">forms</a></dt>
-<dd></dd>
-<dt><a href="#module_layout-state">layout-state</a></dt>
-<dd></dd>
-<dt><a href="#module_lists">lists</a></dt>
-<dd></dd>
-<dt><a href="#module_nav">nav</a></dt>
-<dd></dd>
-<dt><a href="#module_page-data">page-data</a></dt>
-<dd></dd>
-<dt><a href="#module_page-state">page-state</a></dt>
-<dd></dd>
-<dt><a href="#module_preloader">preloader</a></dt>
-<dd></dd>
-<dt><a href="#module_toolbar">toolbar</a></dt>
-<dd></dd>
-<dt><a href="#module_undo">undo</a></dt>
-<dd></dd>
-<dt><a href="#module_validators">validators</a></dt>
-<dd></dd>
-</dl>
+- [component-data](#module_component-data)
+- [decorators](#module_decorators)
+- [deep-linking](#module_deep-linking)
+- [drawers](#module_drawers)
+- [forms](#module_forms)
+- [layout-state](#module_layout-state)
+- [lists](#module_lists)
+- [nav](#module_nav)
+- [page-data](#module_page-data)
+- [page-state](#module_page-state)
+- [preloader](#module_preloader)
+- [toolbar](#module_toolbar)
+- [undo](#module_undo)
+- [validators](#module_validators)
 
 ## Functions
-
-<dl>
-<dt><a href="#isPageSpecific">isPageSpecific(uri, store)</a> ⇒ <code>boolean</code></dt>
-<dd><p>is uri page spectific</p>
-</dd>
-</dl>
-
-<a name="module_component-data"></a>
+[isPageSpecific(uri, store)](#isPageSpecific) ⇒ `boolean`
+Is uri page spectific
 
 ## component-data
 
-* [component-data](#module_component-data)
+* [component-data](#component-data)
     * _static_
-        * [.updateSchemaProp(store, schemaName, inputName, prop, value)](#module_component-data.updateSchemaProp)
-        * [.triggerModelSave(uri, data)](#module_component-data.triggerModelSave) ⇒ <code>promise</code>
-        * [.triggerModelRender(store, uri, data)](#module_component-data.triggerModelRender) ⇒ <code>promise</code>
-        * [.saveComponent(store, uri, data, [eventID], [snapshot], [prevData], forceSave)](#module_component-data.saveComponent) ⇒ <code>Promise</code>
-        * [.removeComponent(store, data)](#module_component-data.removeComponent) ⇒ <code>Promise</code>
-        * [.removeHeadComponent(store, startNode)](#module_component-data.removeHeadComponent) ⇒ <code>Promise</code>
-        * [.addCreatedComponentsToPageArea(store, newComponents, currentURI, path, replace, number, array, boolean)](#module_component-data.addCreatedComponentsToPageArea) ⇒ <code>Promise</code>
-        * [.addComponents(store, [currentURI], parentURI, path, [replace], components)](#module_component-data.addComponents) ⇒ <code>Promise</code>
-        * [.openAddComponent(store, [currentURI], parentURI, path)](#module_component-data.openAddComponent) ⇒ <code>Promise</code>
-        * [.componentAdded(store, componentName, uri)](#module_component-data.componentAdded)
-        * [.closeAddComponent(store)](#module_component-data.closeAddComponent)
-        * [.currentlyRestoring(store, restoring)](#module_component-data.currentlyRestoring)
+        * [.updateSchemaProp(store, schemaName, inputName, prop, value)](#component-dataupdateschemapropstore-schemaname-inputname-prop-value)
+        * [.triggerModelSave(uri, data)](#component-datatriggermodelsaveuri-data-promise) ⇒ `Promise`
+        * [.triggerModelRender(store, uri, data)](#component-datatriggermodelrenderstore-uri-data-promise) ⇒ `Promise`
+        * [.saveComponent(store, uri, data, [eventID], [snapshot], [prevData], forceSave)](#component-datasavecomponentstore-uri-data-eventid-snapshot-prevdata-forcesave-promise) ⇒ `Promise`
+        * [.removeComponent(store, data)](#component-dataremovecomponentstore-data-promise) ⇒ `Promise`
+        * [.removeHeadComponent(store, startNode)](#component-dataremoveheadcomponentstore-startnode-promise) ⇒ `Promise`
+        * [.addCreatedComponentsToPageArea(store, newComponents, currentURI, path, replace, number, array, boolean)](#component-dataaddcreatedcomponentstopageareastore-newcomponents-currenturi-path-replace-number-array-boolean-promise) ⇒ `Promise`
+        * [.addComponents(store, [currentURI], parentURI, path, [replace], components)](#component-dataaddcomponentsstore-currenturi-parenturi-path-replace-components-promise) ⇒ `Promise`
+        * [.openAddComponent(store, [currentURI], parentURI, path)](#component-dataopenaddcomponentstore-currenturi-parenturi-path-promise) ⇒ `Promise`
+        * [.componentAdded(store, componentName, uri)](#component-datacomponentaddedstore-componentname-uri)
+        * [.closeAddComponent(store)](#component-datacloseaddcomponentstore)
+        * [.currentlyRestoring(store, restoring)](#component-datacurrentlyrestoringstore-restoring)
     * _inner_
-        * [~logSaveError(uri, e, data, [eventID], [snapshot], store)](#module_component-data..logSaveError)
-        * [~revertReject(uri, data, [snapshot], paths, store)](#module_component-data..revertReject) ⇒ <code>Promise</code>
-        * [~clientSave(uri, data, oldData, store, [eventID], [snapshot], paths)](#module_component-data..clientSave) ⇒ <code>Promise</code>
-        * [~findIndex(data, [uri])](#module_component-data..findIndex) ⇒ <code>number</code>
-        * [~addComponentsToComponentList(store, data, [currentURI], parentURI, path, [replace], components)](#module_component-data..addComponentsToComponentList) ⇒ <code>Promise</code>
-        * [~addComponentsToComponentProp(store, data, parentURI, path, components)](#module_component-data..addComponentsToComponentProp) ⇒ <code>Promise</code>
-        * [~addComponentsToPageArea(store, currentURI, path, replace, components)](#module_component-data..addComponentsToPageArea) ⇒ <code>Promise</code>
-
-<a name="module_component-data.updateSchemaProp"></a>
+        * [~logSaveError(uri, e, data, [eventID], [snapshot], store)](#component-data-logsaveerroruri-e-data-eventid-snapshot-store)
+        * [~revertReject(uri, data, [snapshot], paths, store)](#component-data-revertrejecturi-data-snapshot-paths-store-promise) ⇒ `Promise`
+        * [~clientSave(uri, data, oldData, store, [eventID], [snapshot], paths)](#component-data-clientsaveuri-data-olddata-store-eventid-snapshot-paths-promise) ⇒ `Promise`
+        * [~findIndex(data, [uri])](#component-data-findindexdata-uri-number) ⇒ `number`
+        * [~addComponentsToComponentList(store, data, [currentURI], parentURI, path, [replace], components)](#component-data-addcomponentstocomponentliststore-data-currenturi-parenturi-path-replace-components-promise) ⇒ `Promise`
+        * [~addComponentsToComponentProp(store, data, parentURI, path, components)](#component-data-addcomponentstocomponentpropstore-data-parenturi-path-components-promise) ⇒ `Promise`
+        * [~addComponentsToPageArea(store, currentURI, path, replace, components)](#component-data-addcomponentstopageareastore-currenturi-path-replace-components-promise) ⇒ `Promise`
 
 ### component-data.updateSchemaProp(store, schemaName, inputName, prop, value)
 update a property value on a component schema
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 **Return{promise}**:   
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| schemaName | <code>string</code> | 
-| inputName | <code>string</code> | 
-| prop | <code>string</code> | 
-| value | <code>object</code> \| <code>string</code> \| <code>number</code> | 
+| store | `object` | 
+| schemaName | `string` | 
+| inputName | `string` | 
+| prop | `string` | 
+| value | `object` / `string` / `number` | 
 
-<a name="module_component-data.triggerModelSave"></a>
-
-### component-data.triggerModelSave(uri, data) ⇒ <code>promise</code>
+### component-data.triggerModelSave(uri, data) ⇒ `promise`
 trigger a the model.save of a component
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| uri | <code>string</code> | 
-| data | <code>object</code> | 
+| uri | `string` | 
+| data | `object` | 
 
-<a name="module_component-data.triggerModelRender"></a>
-
-### component-data.triggerModelRender(store, uri, data) ⇒ <code>promise</code>
+### component-data.triggerModelRender(store, uri, data) ⇒ `promise`
 trigger a the model.render of a component
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| uri | <code>string</code> | 
-| data | <code>object</code> | 
+| store | `object` | 
+| uri | `string` | 
+| data | `object` | 
 
-<a name="module_component-data.saveComponent"></a>
-
-### component-data.saveComponent(store, uri, data, [eventID], [snapshot], [prevData], forceSave) ⇒ <code>Promise</code>
+### component-data.saveComponent(store, uri, data, [eventID], [snapshot], [prevData], forceSave) ⇒ `Promise`
 save a component's data and re-render
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| uri | <code>string</code> |  |
-| data | <code>object</code> | (may be a subset of the data) |
-| [eventID] | <code>string</code> | when saving from a pubsub subscription |
-| [snapshot] | <code>boolean</code> | set to false if save is triggered by undo/redo |
-| [prevData] | <code>object</code> | manually passed in when undoing/redoing (because the store has already been updated) |
-| forceSave | <code>boolean</code> | if true, component will be saved even if it doesn't appear to have changed |
+| store | `object` |  |
+| uri | `string` |  |
+| data |`object` | (may be a subset of the data) |
+| [eventID] | `string` | when saving from a pubsub subscription |
+| [snapshot] | `boolean` | set to false if save is triggered by undo/redo |
+| [prevData] | `object` | manually passed in when undoing/redoing (because the store has already been updated) |
+| forceSave | `boolean` | if true, component will be saved even if it doesn't appear to have changed |
 
-<a name="module_component-data.removeComponent"></a>
-
-### component-data.removeComponent(store, data) ⇒ <code>Promise</code>
+### component-data.removeComponent(store, data) ⇒ `Promise`
 remove a component from its parent
 note: removes from parent component OR page
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| data | <code>Element</code> | el || {el, msg} where el is the component to delete |
+| store | `object` |  |
+| data | `Element` | {el, msg} where el is the component to delete |
 
-<a name="module_component-data.removeHeadComponent"></a>
-
-### component-data.removeHeadComponent(store, startNode) ⇒ <code>Promise</code>
+### component-data.removeHeadComponent(store, startNode) ⇒ `Promise`
 remove head components (from page or layout)
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| startNode | <code>Node</code> | comment with data-uri |
+| store | `object` |  |
+| startNode | `Node` | comment with data-uri |
 
-<a name="module_component-data.addCreatedComponentsToPageArea"></a>
-
-### component-data.addCreatedComponentsToPageArea(store, newComponents, currentURI, path, replace, number, array, boolean) ⇒ <code>Promise</code>
+### component-data.addCreatedComponentsToPageArea(store, newComponents, currentURI, path, replace, number, array, boolean) ⇒ `Promise`
 add components to a page area
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| newComponents | <code>array</code> | 
-| currentURI | <code>string</code> | 
-| path | <code>string</code> | 
-| replace | <code>boolean</code> | 
-| number | <code>index</code> | 
-| array | <code>data</code> | 
-| boolean | <code>forceRender</code> | 
+| store | `object` | 
+| newComponents | `array` | 
+| currentURI | `string` | 
+| path | `string` | 
+| replace | `boolean` | 
+| number | `index` | 
+| array | `data` | 
+| boolean | `forceRender` | 
 
-<a name="module_component-data.addComponents"></a>
-
-### component-data.addComponents(store, [currentURI], parentURI, path, [replace], components) ⇒ <code>Promise</code>
+### component-data.addComponents(store, [currentURI], parentURI, path, [replace], components) ⇒ `Promise`
 add components to a parent component (or page)
 note: allows multiple components to be added at once
 note: always creates new instances of the components you're adding
 note: allows you to replace a specific uri, or add components after it
 note: if no currentURI passed in, it will add new components to the end (and won't replace anything)
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
-**Returns**: <code>Promise</code> - with the last added component's el  
+**Kind**: static method of [`component-data`](#component-data)  
+**Returns**: `Promise` - with the last added component's el  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| [currentURI] | <code>string</code> | if adding after / replacing a specific component |
-| parentURI | <code>string</code> |  |
-| path | <code>string</code> |  |
-| [replace] | <code>boolean</code> | to replace the current URI |
-| components | <code>array</code> | to add (object with name and [data]) |
+| store | `object` |  |
+| [currentURI] | `string` | if adding after / replacing a specific component |
+| parentURI | `string` |  |
+| path | `string` |  |
+| [replace] | `boolean` | to replace the current URI |
+| components | `array` | to add (object with name and [data]) |
 
-<a name="module_component-data.openAddComponent"></a>
-
-### component-data.openAddComponent(store, [currentURI], parentURI, path) ⇒ <code>Promise</code>
+### component-data.openAddComponent(store, [currentURI], parentURI, path) ⇒ `Promise`
 open the add components pane, or add a new components
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| [currentURI] | <code>string</code> | if we're inserting after a specific component |
-| parentURI | <code>string</code> |  |
-| path | <code>string</code> |  |
-
-<a name="module_component-data.componentAdded"></a>
+| store | `object` |  |
+| [currentURI] | `string` | if we're inserting after a specific component |
+| parentURI | `string` |  |
+| path | `string` |  |
 
 ### component-data.componentAdded(store, componentName, uri)
 Store the last item added
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| componentName | <code>string</code> | 
-| uri | <code>string</code> | 
-
-<a name="module_component-data.closeAddComponent"></a>
+| store | `object` | 
+| componentName | `string` | 
+| uri | `string` |
 
 ### component-data.closeAddComponent(store)
 Close the add component
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-
-<a name="module_component-data.currentlyRestoring"></a>
+| store | `object` | 
 
 ### component-data.currentlyRestoring(store, restoring)
 open the add components pane, or add a new components
 
-**Kind**: static method of [<code>component-data</code>](#module_component-data)  
+**Kind**: static method of [`component-data`](#component-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| restoring | <code>boolean</code> | if we're currently restoring a page |
-
-<a name="module_component-data..logSaveError"></a>
+| store | `object` |  |
+| restoring | `boolean` | if we're currently restoring a page |
 
 ### component-data~logSaveError(uri, e, data, [eventID], [snapshot], store)
 log errors when components save and display them to the user
 
-**Kind**: inner method of [<code>component-data</code>](#module_component-data)  
+**Kind**: inner method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| uri | <code>string</code> | 
-| e | <code>Error</code> | 
-| data | <code>object</code> | 
-| [eventID] | <code>string</code> | 
-| [snapshot] | <code>boolean</code> | 
-| store | <code>object</code> | 
+| uri | `string` | 
+| e | `Error` | 
+| data | `object` | 
+| [eventID] | `string` | 
+| [snapshot] | `boolean` | 
+| store | `object` | 
 
-<a name="module_component-data..revertReject"></a>
-
-### component-data~revertReject(uri, data, [snapshot], paths, store) ⇒ <code>Promise</code>
+### component-data~revertReject(uri, data, [snapshot], paths, store) ⇒ `Promise`
 re-render (reverting) a component and stop the saving promise chain
 
-**Kind**: inner method of [<code>component-data</code>](#module_component-data)  
+**Kind**: inner method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| uri | <code>string</code> | 
-| data | <code>object</code> | 
-| [snapshot] | <code>boolean</code> | 
-| paths | <code>array</code> | 
-| store | <code>object</code> | 
+| uri | `string` | 
+| data | `object` | 
+| [snapshot] | `boolean` | 
+| paths | `array` | 
+| store | `object` | 
 
-<a name="module_component-data..clientSave"></a>
-
-### component-data~clientSave(uri, data, oldData, store, [eventID], [snapshot], paths) ⇒ <code>Promise</code>
+### component-data~clientSave(uri, data, oldData, store, [eventID], [snapshot], paths) ⇒ `Promise`
 save data client-side and queue up api call for the server
 note: this uses the components' model.js (if it exists) and handlebars template
 note: server-side saving and/or re-rendering has been removed in kiln v4.x
 
-**Kind**: inner method of [<code>component-data</code>](#module_component-data)  
+**Kind**: inner method of [`component-data`](#component-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| uri | <code>string</code> |  |
-| data | <code>object</code> |  |
-| oldData | <code>object</code> |  |
-| store | <code>object</code> |  |
-| [eventID] | <code>string</code> |  |
-| [snapshot] | <code>boolean</code> | passed through to render |
-| paths | <code>array</code> |  |
+| uri | `string` |  |
+| data | `object` |  |
+| oldData | `object` |  |
+| store | `object` |  |
+| [eventID] | `string` |  |
+| [snapshot] | `boolean` | passed through to render |
+| paths | `array` |  |
 
-<a name="module_component-data..findIndex"></a>
-
-### component-data~findIndex(data, [uri]) ⇒ <code>number</code>
+### component-data~findIndex(data, [uri]) ⇒ `number`
 find the index of a uri in a list
 this is broken out into a separate function so we don't assume an index of 0 is falsy
 
-**Kind**: inner method of [<code>component-data</code>](#module_component-data)  
+**Kind**: inner method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| data | <code>array</code> | 
-| [uri] | <code>string</code> | 
+| data | `array` | 
+| [uri] | `string` | 
 
-<a name="module_component-data..addComponentsToComponentList"></a>
-
-### component-data~addComponentsToComponentList(store, data, [currentURI], parentURI, path, [replace], components) ⇒ <code>Promise</code>
+### component-data~addComponentsToComponentList(store, data, [currentURI], parentURI, path, [replace], components) ⇒ `Promise`
 add one or more components to a component list
 
-**Kind**: inner method of [<code>component-data</code>](#module_component-data)  
+**Kind**: inner method of [`component-data`](#component-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| data | <code>array</code> | list data |
-| [currentURI] | <code>string</code> | if you want to add after / replace a specific current component |
-| parentURI | <code>string</code> |  |
-| path | <code>string</code> | of the list |
-| [replace] | <code>boolean</code> | to replace currentURI |
-| components | <code>array</code> | with { name, [data] } |
+| store | `object` |  |
+| data | `array` | list data |
+| [currentURI] | `string` | if you want to add after / replace a specific current component |
+| parentURI | `string` |  |
+| path | `string` | of the list |
+| [replace] | `boolean` | to replace currentURI |
+| components | `array` | with { name, [data] } |
 
-<a name="module_component-data..addComponentsToComponentProp"></a>
-
-### component-data~addComponentsToComponentProp(store, data, parentURI, path, components) ⇒ <code>Promise</code>
+### component-data~addComponentsToComponentProp(store, data, parentURI, path, components) ⇒ `Promise`
 replace a single component in another component's property
 
-**Kind**: inner method of [<code>component-data</code>](#module_component-data)  
+**Kind**: inner method of [`component-data`](#component-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| data | <code>object</code> |  |
-| parentURI | <code>string</code> |  |
-| path | <code>string</code> |  |
-| components | <code>array</code> | note: it'll only replace using the first thing in this array |
+| store | `object` |  |
+| data | `object` |  |
+| parentURI | `string` |  |
+| path | `string` |  |
+| components | `array` | note: it'll only replace using the first thing in this array |
 
-<a name="module_component-data..addComponentsToPageArea"></a>
-
-### component-data~addComponentsToPageArea(store, currentURI, path, replace, components) ⇒ <code>Promise</code>
+### component-data~addComponentsToPageArea(store, currentURI, path, replace, components) ⇒ `Promise`
 create components to be added to a page area (i.e. head, main, etc.)
 
-**Kind**: inner method of [<code>component-data</code>](#module_component-data)  
+**Kind**: inner method of [`component-data`](#component-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| currentURI | <code>string</code> | 
-| path | <code>string</code> | 
-| replace | <code>boolean</code> | 
-| components | <code>array</code> | 
+| store | `object` | 
+| currentURI | `string` | 
+| path | `string` | 
+| replace | `boolean` | 
+| components | `array` | 
 
 <a name="module_decorators"></a>
 
 ## decorators
 
-* [decorators](#module_decorators)
-    * [.unselect(store)](#module_decorators.unselect)
-    * [.select(store, el)](#module_decorators.select)
-    * [.scrollToComponent(store, el)](#module_decorators.scrollToComponent)
-    * [.navigateComponents(store, direction)](#module_decorators.navigateComponents) ⇒ <code>Promise</code>
-    * [.unfocus(store)](#module_decorators.unfocus) ⇒ <code>Promise</code>
-
-<a name="module_decorators.unselect"></a>
+* [decorators](#decorators)
+    * [.unselect(store)](#decoratorsunselectstore)
+    * [.select(store, el)](#decoratorsselectstore-el)
+    * [.scrollToComponent(store, el)](#decoratorsscrolltocomponentstore-el)
+    * [.navigateComponents(store, direction)](#decoratorsnavigatecomponentsstore-direction-promise) ⇒ `Promise`
+    * [.unfocus(store)](#decoratorsunfocusstore-promise) ⇒ `Promise`
 
 ### decorators.unselect(store)
 unselect currently-selected component
 
-**Kind**: static method of [<code>decorators</code>](#module_decorators)  
+**Kind**: static method of [`decorators`](#decorators)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-
-<a name="module_decorators.select"></a>
+| store | `object` | 
 
 ### decorators.select(store, el)
 select a component
 
-**Kind**: static method of [<code>decorators</code>](#module_decorators)  
+**Kind**: static method of [`decorators`](#decorators)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| el | <code>element</code> | 
-
-<a name="module_decorators.scrollToComponent"></a>
+| store | `object` | 
+| el | `element` | 
 
 ### decorators.scrollToComponent(store, el)
 Scroll user to the component. "Weeee!" or "What the?"
 
-**Kind**: static method of [<code>decorators</code>](#module_decorators)  
+**Kind**: static method of [`decorators`](#decorators)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| el | <code>Element</code> | 
+| store | `object` | 
+| el | `Element` | 
 
-<a name="module_decorators.navigateComponents"></a>
-
-### decorators.navigateComponents(store, direction) ⇒ <code>Promise</code>
+### decorators.navigateComponents(store, direction) ⇒ `Promise`
 navigate to the previous or next component
 
-**Kind**: static method of [<code>decorators</code>](#module_decorators)  
+**Kind**: static method of [`decorators`](#decorators)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| direction | <code>string</code> | 'prev' or 'next' |
+| store | `object` |  |
+| direction | `string` | 'prev' or 'next' |
 
-<a name="module_decorators.unfocus"></a>
-
-### decorators.unfocus(store) ⇒ <code>Promise</code>
+### decorators.unfocus(store) ⇒ `Promise`
 unfocus currently-focused field/group
 
-**Kind**: static method of [<code>decorators</code>](#module_decorators)  
+**Kind**: static method of [`decorators`](#decorators)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-
-<a name="module_deep-linking"></a>
+| store | `object` | 
 
 ## deep-linking
 
-* [deep-linking](#module_deep-linking)
-    * [.parseURLHash(store)](#module_deep-linking.parseURLHash) ⇒ <code>Promise</code>
-    * [.setHash(commit, [uri], [path], [initialFocus], [menu])](#module_deep-linking.setHash)
-    * [.clearHash(commit)](#module_deep-linking.clearHash)
+* [deep-linking](#deep-linking)
+    * [.parseURLHash(store)](#deep-linkingparseurlhashstore-promise) ⇒ `Promise`
+    * [.setHash(commit, [uri], [path], [initialFocus], [menu])](#deep-linkingsethashcommit-uri-path-initialfocus-menu)
+    * [.clearHash(commit)](#deep-linkingclearhashcommit)
 
-<a name="module_deep-linking.parseURLHash"></a>
-
-### deep-linking.parseURLHash(store) ⇒ <code>Promise</code>
+### deep-linking.parseURLHash(store) ⇒ `Promise`
 parse url hash, opening form or clay menu as necessary
 
-**Kind**: static method of [<code>deep-linking</code>](#module_deep-linking)  
+**Kind**: static method of [`deep-linking`](#deep-linking)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-
-<a name="module_deep-linking.setHash"></a>
+| store | `object` | 
 
 ### deep-linking.setHash(commit, [uri], [path], [initialFocus], [menu])
 set hash in window and store
 
-**Kind**: static method of [<code>deep-linking</code>](#module_deep-linking)  
+**Kind**: static method of [`deep-linking`](#deep-linking)  
 
 | Param | Type |
 | --- | --- |
-| commit | <code>function</code> | 
-| [uri] | <code>string</code> | 
-| [path] | <code>string</code> | 
-| [initialFocus] | <code>string</code> | 
-| [menu] | <code>object</code> | 
-
-<a name="module_deep-linking.clearHash"></a>
+| commit | `function` | 
+| [uri] | `string` | 
+| [path] | `string` | 
+| [initialFocus] | `string` | 
+| [menu] | `object` |
 
 ### deep-linking.clearHash(commit)
 clear hash in window and store
 
-**Kind**: static method of [<code>deep-linking</code>](#module_deep-linking)  
+**Kind**: static method of [`deep-linking`](#deep-linking)  
 
 | Param | Type |
 | --- | --- |
-| commit | <code>function</code> | 
-
-<a name="module_drawers"></a>
+| commit | `function` |
 
 ## drawers
 
-* [drawers](#module_drawers)
-    * [.closeDrawer(store)](#module_drawers.closeDrawer)
-    * [.openDrawer(store, nameOrConfig)](#module_drawers.openDrawer)
-
-<a name="module_drawers.closeDrawer"></a>
+* [drawers](#drawers)
+    * [.closeDrawer(store)](#drawersclosedrawerstore)
+    * [.openDrawer(store, nameOrConfig)](#drawersopendrawerstore-nameorconfig)
 
 ### drawers.closeDrawer(store)
 close drawer without toggling a new drawer
 
-**Kind**: static method of [<code>drawers</code>](#module_drawers)  
+**Kind**: static method of [`drawers`](#drawers)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>Object</code> | 
-
-<a name="module_drawers.openDrawer"></a>
+| store | `Object` |
 
 ### drawers.openDrawer(store, nameOrConfig)
 open drawer
 
-**Kind**: static method of [<code>drawers</code>](#module_drawers)  
+**Kind**: static method of [`drawers`](#drawers)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>Object</code> |  |
-| nameOrConfig | <code>string</code> \| <code>object</code> | either just the tab name or a json object for deeper linking |
-
-<a name="module_forms"></a>
+| store | `Object` |  |
+| nameOrConfig | `string` \ `object` | either just the tab name or a json object for deeper linking |
 
 ## forms
 
-* [forms](#module_forms)
+* [forms](#forms)
     * _static_
         * [.updateFormData(store, path, val)](#module_forms.updateFormData)
         * [.openForm(store, uri, path, [el], [offset], [appendText], [initialFocus], pos)](#module_forms.openForm)
-        * [.closeForm(store)](#module_forms.closeForm) ⇒ <code>promise</code>
+        * [.closeForm(store)](#module_forms.closeForm) ⇒ `promise`
     * _inner_
-        * [~hasDataChanged(newData, oldData)](#module_forms..hasDataChanged) ⇒ <code>Boolean</code>
-
-<a name="module_forms.updateFormData"></a>
+        * [~hasDataChanged(newData, oldData)](#module_forms..hasDataChanged) ⇒ `Boolean`
 
 ### forms.updateFormData(store, path, val)
 Update form data
 
-**Kind**: static method of [<code>forms</code>](#module_forms)  
+**Kind**: static method of [`forms`](#forms)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| path | <code>string</code> | 
-| val | <code>string</code> \| <code>number</code> | 
-
-<a name="module_forms.openForm"></a>
+| store | `object` | 
+| path | `string` | 
+| val | `string` \ `number` |
 
 ### forms.openForm(store, uri, path, [el], [offset], [appendText], [initialFocus], pos)
 open form
 
-**Kind**: static method of [<code>forms</code>](#module_forms)  
+**Kind**: static method of [`forms`](#forms)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| uri | <code>string</code> | component uri |
-| path | <code>string</code> | field/form path |
-| [el] | <code>Element</code> | parent element (for inline forms) |
-| [offset] | <code>number</code> | caret offset (for text inputs) |
-| [appendText] | <code>string</code> | text to append (for text inputs, used when splitting/merging components with text fields) |
-| [initialFocus] | <code>string</code> | if focusing on a specific field when opening the form |
-| pos | <code>object</code> | x/y coordinates used to position overlay forms |
+| store | `object` |  |
+| uri | `string` | component uri |
+| path | `string` | field/form path |
+| [el] | `Element` | parent element (for inline forms) |
+| [offset] | `number` | caret offset (for text inputs) |
+| [appendText] | `string` | text to append (for text inputs, used when splitting/merging components with text fields) |
+| [initialFocus] | `string` | if focusing on a specific field when opening the form |
+| pos | `object` | x/y coordinates used to position overlay forms |
 
-<a name="module_forms.closeForm"></a>
-
-### forms.closeForm(store) ⇒ <code>promise</code>
+### forms.closeForm(store) ⇒ `promise`
 Close a form
 
-**Kind**: static method of [<code>forms</code>](#module_forms)  
+**Kind**: static method of [`forms`](#forms)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
+| store | `object` | 
 
-<a name="module_forms..hasDataChanged"></a>
-
-### forms~hasDataChanged(newData, oldData) ⇒ <code>Boolean</code>
+### forms~hasDataChanged(newData, oldData) ⇒ `Boolean`
 determine if data in form has changed
 note: convert data to plain objects, since they're reactive
 
-**Kind**: inner method of [<code>forms</code>](#module_forms)  
+**Kind**: inner method of [`forms`](#forms)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| newData | <code>object</code> | from form |
-| oldData | <code>object</code> | from store |
-
-<a name="module_layout-state"></a>
+| newData | `object` | from form |
+| oldData | `object` | from store |
 
 ## layout-state
 
-* [layout-state](#module_layout-state)
-    * [.fetchLayoutState(store, [preloadOptions])](#module_layout-state.fetchLayoutState) ⇒ <code>Promise</code>
-    * [.updateLayout(store, [data], [preloadOptions])](#module_layout-state.updateLayout) ⇒ <code>Promise</code>
-    * [.scheduleLayout(store, timestamp)](#module_layout-state.scheduleLayout) ⇒ <code>Promise</code>
-    * [.unscheduleLayout(store, [publishing])](#module_layout-state.unscheduleLayout) ⇒ <code>Promise</code>
-    * [.publishLayout(store)](#module_layout-state.publishLayout) ⇒ <code>Promise</code>
+* [layout-state](#layout-state)
+    * [.fetchLayoutState(store, [preloadOptions])](#layout-statefetchlayoutstatestore-preloadoptions-promise) ⇒ `Promise`
+    * [.updateLayout(store, [data], [preloadOptions])](#layout-stateupdatelayoutstore-data-preloadoptions-promise) ⇒ `Promise`
+    * [.scheduleLayout(store, timestamp)](#layout-stateschedulelayoutstore-timestamp-promise) ⇒ `Promise`
+    * [.unscheduleLayout(store, [publishing])](#layout-stateunschedulelayoutstore-publishing-promise) ⇒ `Promise`
+    * [.publishLayout(store)](#layout-statepublishlayoutstore-promise) ⇒ `Promise`
 
 <a name="module_layout-state.fetchLayoutState"></a>
 
-### layout-state.fetchLayoutState(store, [preloadOptions]) ⇒ <code>Promise</code>
+### layout-state.fetchLayoutState(store, [preloadOptions]) ⇒ `Promise`
 get the list data for a specific layout
 note: if prefix / uri is specified, this does NOT commit the data (only returns it),
 allowing the preloader to use it when doing the initial preload of data
 
-**Kind**: static method of [<code>layout-state</code>](#module_layout-state)  
+**Kind**: static method of [`layout-state`](#layout-state)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| [preloadOptions] | <code>object</code> | 
-| [preloadOptions.uri] | <code>string</code> | 
-| [preloadOptions.prefix] | <code>string</code> | 
-| [preloadOptions.user] | <code>object</code> | 
+| store | `object` | 
+| [preloadOptions] | `object` | 
+| [preloadOptions.uri] | `string` | 
+| [preloadOptions.prefix] | `string` | 
+| [preloadOptions.user] | `object` |
 
-<a name="module_layout-state.updateLayout"></a>
-
-### layout-state.updateLayout(store, [data], [preloadOptions]) ⇒ <code>Promise</code>
+### layout-state.updateLayout(store, [data], [preloadOptions]) ⇒ `Promise`
 update a layout's title, or just the latest timestamp + user
 
-**Kind**: static method of [<code>layout-state</code>](#module_layout-state)  
+**Kind**: static method of [`layout-state`](#layout-state)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| [data] | <code>object</code> | 
-| [data.title] | <code>string</code> | 
-| [preloadOptions] | <code>object</code> | 
+| store | `object` | 
+| [data] | `object` | 
+| [data.title] | `string` | 
+| [preloadOptions] | `object` |
 
-<a name="module_layout-state.scheduleLayout"></a>
-
-### layout-state.scheduleLayout(store, timestamp) ⇒ <code>Promise</code>
+### layout-state.scheduleLayout(store, timestamp) ⇒ `Promise`
 schedule the layout and update its index
 
-**Kind**: static method of [<code>layout-state</code>](#module_layout-state)  
+**Kind**: static method of [`layout-state`](#layout-state)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| timestamp | <code>Date</code> | 
+| store | `object` | 
+| timestamp | `Date` |
 
-<a name="module_layout-state.unscheduleLayout"></a>
-
-### layout-state.unscheduleLayout(store, [publishing]) ⇒ <code>Promise</code>
+### layout-state.unscheduleLayout(store, [publishing]) ⇒ `Promise`
 unschedule the layout
 get updated layout state if the call wasn't made during layout publish
 
-**Kind**: static method of [<code>layout-state</code>](#module_layout-state)  
+**Kind**: static method of [`layout-state`](#layout-state)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| [publishing] | <code>Boolean</code> | 
+| store | `object` | 
+| [publishing] | `Boolean` | 
 
 <a name="module_layout-state.publishLayout"></a>
 
-### layout-state.publishLayout(store) ⇒ <code>Promise</code>
+### layout-state.publishLayout(store) ⇒ `Promise`
 publish layout
 note: layouts index is updated server-side, including unscheduling the layout
 if it's currently scheduled
 also note: this will trigger a fetch of the updated (published) layout state
 
-**Kind**: static method of [<code>layout-state</code>](#module_layout-state)  
+**Kind**: static method of [`layout-state`](#layout-state)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-
-<a name="module_lists"></a>
-
+| store | `object` |
 ## lists
-<a name="module_nav"></a>
+
+---
 
 ## nav
-<a name="module_nav.openNav"></a>
 
 ### nav.openNav(store, nameOrConfig)
 open nav tab
 
-**Kind**: static method of [<code>nav</code>](#module_nav)  
+**Kind**: static method of [`nav`](#nav)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| nameOrConfig | <code>string</code> \| <code>object</code> | tab name, or clay menu config openNav sets the ui.currentDrawer vuex variable, this allows drawers (the right slide-in menus) as well as the "nav" (the left slide-in menu) to be deep linked to. The openNav/closeNav are functions are depreciated. Should use the openDrawer/closeDrawer/toggleDrawer actions Just leaving these here in case any legacy plugins are still calling these functions |
-
-<a name="module_page-data"></a>
+| store | `object` |  |
+| nameOrConfig | `string`\ `object` | tab name, or clay menu config openNav sets the ui.currentDrawer vuex variable, this allows drawers (the right slide-in menus) as well as the "nav" (the left slide-in menu) to be deep linked to. The openNav/closeNav are functions are depreciated. Should use the openDrawer/closeDrawer/toggleDrawer actions Just leaving these here in case any legacy plugins are still calling these functions |
 
 ## page-data
 
-* [page-data](#module_page-data)
+* [page-data](#page-data)
     * _static_
-        * [.savePage(store, data, [snapshot])](#module_page-data.savePage) ⇒ <code>Promise</code>
-        * [.createPage(store, id)](#module_page-data.createPage) ⇒ <code>Promise</code>
-        * [.isPublishing(store, isPublishing)](#module_page-data.isPublishing)
-        * [.publishPage(store, uri)](#module_page-data.publishPage) ⇒ <code>Promise</code>
-        * [.unpublishPage(store, uri)](#module_page-data.unpublishPage) ⇒ <code>Promise</code>
-        * [.schedulePage(store, uri, timestamp)](#module_page-data.schedulePage) ⇒ <code>Promise</code>
-        * [.unschedulePage(store, [publishing])](#module_page-data.unschedulePage) ⇒ <code>Promise</code>
+        * [.savePage(store, data, [snapshot])](#page-datasavepagestore-data-snapshot-promise) ⇒ `Promise`
+        * [.createPage(store, id)](#page-datacreatepagestore-id-promise) ⇒ `Promise`
+        * [.isPublishing(store, isPublishing)](#page-dataispublishingstore-ispublishing)
+        * [.publishPage(store, uri)](#page-datapublishpagestore-uri-promise) ⇒ `Promise`
+        * [.unpublishPage(store, uri)](#page-dataunpublishpagestore-uri-promise) ⇒ `Promise`
+        * [.schedulePage(store, uri, timestamp)](#page-dataschedulepagestore-uri-timestamp-promise) ⇒ `Promise`
+        * [.unschedulePage(store, [publishing])](#page-dataunschedulepagestore-publishing-promise) ⇒ `Promise`
     * _inner_
-        * [~shouldRender(paths)](#module_page-data..shouldRender) ⇒ <code>boolean</code>
-        * [~removeURI(uri, store)](#module_page-data..removeURI) ⇒ <code>Promise</code>
+        * [~shouldRender(paths)](#page-data-shouldrenderpaths-boolean) ⇒ `boolean`
+        * [~removeURI(uri, store)](#page-data-removeuriuri-store-promise) ⇒ `Promise`
 
-<a name="module_page-data.savePage"></a>
-
-### page-data.savePage(store, data, [snapshot]) ⇒ <code>Promise</code>
+### page-data.savePage(store, data, [snapshot]) ⇒ `Promise`
 save a page's data, but do not re-render
 because, uh, that would just be reloading the page
 
-**Kind**: static method of [<code>page-data</code>](#module_page-data)  
+**Kind**: static method of [`page-data`](#page-data)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| data | <code>\*</code> | to save |
-| [snapshot] | <code>boolean</code> | false if we're undoing/redoing |
+| store | `object` |  |
+| data | `\*` | to save |
+| [snapshot] | `boolean` | false if we're undoing/redoing |
 
-<a name="module_page-data.createPage"></a>
-
-### page-data.createPage(store, id) ⇒ <code>Promise</code>
+### page-data.createPage(store, id) ⇒ `Promise`
 create a new page, then return its editable link
 
-**Kind**: static method of [<code>page-data</code>](#module_page-data)  
+**Kind**: static method of [`page-data`](#page-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| id | <code>string</code> | 
-
-<a name="module_page-data.isPublishing"></a>
+| store | `object` | 
+| id | `string` |
 
 ### page-data.isPublishing(store, isPublishing)
 set currentlyPublishing in state
 
-**Kind**: static method of [<code>page-data</code>](#module_page-data)  
+**Kind**: static method of [`page-data`](#page-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| isPublishing | <code>boolean</code> | 
+| store | `object` | 
+| isPublishing | `boolean` |
 
-<a name="module_page-data.publishPage"></a>
-
-### page-data.publishPage(store, uri) ⇒ <code>Promise</code>
+### page-data.publishPage(store, uri) ⇒ `Promise`
 manually publish the page
 
-**Kind**: static method of [<code>page-data</code>](#module_page-data)  
+**Kind**: static method of [`page-data`](#page-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| uri | <code>string</code> | 
+| store | `object` | 
+| uri | `string` |
 
-<a name="module_page-data.unpublishPage"></a>
-
-### page-data.unpublishPage(store, uri) ⇒ <code>Promise</code>
+### page-data.unpublishPage(store, uri) ⇒ `Promise`
 remove uri from /uris/
 
-**Kind**: static method of [<code>page-data</code>](#module_page-data)  
+**Kind**: static method of [`page-data`](#page-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| uri | <code>string</code> | 
+| store | `object` | 
+| uri | `string` |
 
-<a name="module_page-data.schedulePage"></a>
-
-### page-data.schedulePage(store, uri, timestamp) ⇒ <code>Promise</code>
+### page-data.schedulePage(store, uri, timestamp) ⇒ `Promise`
 schedule the page to publish
 
-**Kind**: static method of [<code>page-data</code>](#module_page-data)  
+**Kind**: static method of [`page-data`](#page-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| uri | <code>string</code> | 
-| timestamp | <code>Date</code> | 
+| store | `object` | 
+| uri | `string` | 
+| timestamp | `Date` |
 
-<a name="module_page-data.unschedulePage"></a>
-
-### page-data.unschedulePage(store, [publishing]) ⇒ <code>Promise</code>
+### page-data.unschedulePage(store, [publishing]) ⇒ `Promise`
 unschedule the page
 get updated page state if the call wasn't made during a page publish
 
-**Kind**: static method of [<code>page-data</code>](#module_page-data)  
+**Kind**: static method of [`page-data`](#page-data)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| [publishing] | <code>Boolean</code> | 
+| store | `object` | 
+| [publishing] | `Boolean` |
 
-<a name="module_page-data..shouldRender"></a>
-
-### page-data~shouldRender(paths) ⇒ <code>boolean</code>
+### page-data~shouldRender(paths) ⇒ `boolean`
 iterate through the paths we're saving
 if one of them ISN'T in the internalPageProps, we should re-render
 
-**Kind**: inner method of [<code>page-data</code>](#module_page-data)  
+**Kind**: inner method of [`page-data`](#page-data)  
 
 | Param | Type |
 | --- | --- |
-| paths | <code>array</code> | 
+| paths | `array` |
 
-<a name="module_page-data..removeURI"></a>
-
-### page-data~removeURI(uri, store) ⇒ <code>Promise</code>
+### page-data~removeURI(uri, store) ⇒ `Promise`
 remove uri from /uris/
 
-**Kind**: inner method of [<code>page-data</code>](#module_page-data)  
+**Kind**: inner method of [`page-data`](#page-data)  
 
 | Param | Type |
 | --- | --- |
-| uri | <code>String</code> | 
-| store | <code>Object</code> | 
-
-<a name="module_page-state"></a>
+| uri | `String` | 
+| store | `Object` |
 
 ## page-state
 
-* [page-state](#module_page-state)
+* [page-state](#page-state)
     * _static_
-        * [.updatePageList(store, [data])](#module_page-state.updatePageList) ⇒ <code>Promise</code>
-        * [.getListData(store, uri, [prefix])](#module_page-state.getListData) ⇒ <code>Promise</code>
+        * [.updatePageList(store, [data])](#page-stateupdatepageliststore-data-promise) ⇒ `Promise`
+        * [.getListData(store, uri, [prefix])](#page-stategetlistdatastore-uri-prefix-promise) ⇒ `Promise`
     * _inner_
-        * [~sequentialUpdate(prefix, uri, data)](#module_page-state..sequentialUpdate) ⇒ <code>Promise</code>
+        * [~sequentialUpdate(prefix, uri, data)](#page-state-sequentialupdateprefix-uri-data-promise) ⇒ `Promise`
 
-<a name="module_page-state.updatePageList"></a>
-
-### page-state.updatePageList(store, [data]) ⇒ <code>Promise</code>
+### page-state.updatePageList(store, [data]) ⇒ `Promise`
 update page list with data provided from pubsub
 note: if called without data, this just updates the updateTime and user
 (e.g. when saving components in the page)
 note: if called with a user, it adds the user (with updateTime) to the page (instead of current user)
 
-**Kind**: static method of [<code>page-state</code>](#module_page-state)  
+**Kind**: static method of [`page-state`](#page-state)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-| [data] | <code>object</code> | 
+| store | `object` | 
+| [data] | `object` |
 
-<a name="module_page-state.getListData"></a>
-
-### page-state.getListData(store, uri, [prefix]) ⇒ <code>Promise</code>
+### page-state.getListData(store, uri, [prefix]) ⇒ `Promise`
 get the list data for a specific page
 note: if prefix is specified, this does NOT commit the data (only returns it),
 allowing the preloader to use it when doing the initial preload of data
 
-**Kind**: static method of [<code>page-state</code>](#module_page-state)  
+**Kind**: static method of [`page-state`](#page-state)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| uri | <code>string</code> |  |
-| [prefix] | <code>string</code> | passed in when preloading (e.g. if site isn't in store yet) |
+| store | `object` |  |
+| uri | `string` |  |
+| [prefix] | `string` | passed in when preloading (e.g. if site isn't in store yet) |
 
-<a name="module_page-state..sequentialUpdate"></a>
-
-### page-state~sequentialUpdate(prefix, uri, data) ⇒ <code>Promise</code>
+### page-state~sequentialUpdate(prefix, uri, data) ⇒ `Promise`
 run page list updates sequentially, grabbing from the store after each to prevent race conditions
 
-**Kind**: inner method of [<code>page-state</code>](#module_page-state)  
+**Kind**: inner method of [`page-state`](#page-state)  
 
 | Param | Type |
 | --- | --- |
-| prefix | <code>string</code> | 
-| uri | <code>string</code> | 
-| data | <code>object</code> | 
-
-<a name="module_preloader"></a>
+| prefix | `string` | 
+| uri | `string` | 
+| data | `object` |
 
 ## preloader
 
-* [preloader](#module_preloader)
-    * [~getComponentModels()](#module_preloader..getComponentModels) ⇒ <code>object</code>
-    * [~getComponentKilnjs()](#module_preloader..getComponentKilnjs) ⇒ <code>object</code>
-    * [~reduceComponents(result, val)](#module_preloader..reduceComponents) ⇒ <code>obj</code>
-    * [~composeLayoutData(layoutSchema, components, original)](#module_preloader..composeLayoutData) ⇒ <code>object</code>
-    * [~reduceTemplates(result, val, key)](#module_preloader..reduceTemplates) ⇒ <code>obj</code>
-    * [~getPageStatus(state)](#module_preloader..getPageStatus) ⇒ <code>string</code>
-    * [~getSchemas(schemas, kilnjs)](#module_preloader..getSchemas) ⇒ <code>object</code>
+* [preloader](#preloader)
+    * [~getComponentModels()](#preloader-getcomponentmodels-object) ⇒ `object`
+    * [~getComponentKilnjs()](#preloader-getcomponentkilnjs-object) ⇒ `object`
+    * [~reduceComponents(result, val)](#preloader-reducecomponentsresult-val-obj) ⇒ `obj`
+    * [~composeLayoutData(layoutSchema, components, original)](#preloader-composelayoutdatalayoutschema-components-original-object) ⇒ `object`
+    * [~reduceTemplates(result, val, key)](#preloader-reducetemplatesresult-val-key-obj) ⇒ `obj`
+    * [~getPageStatus(state)](#preloader-getpagestatusstate-string) ⇒ `string`
+    * [~getSchemas(schemas, kilnjs)](#preloader-getschemasschemas-kilnjs-object) ⇒ `object`
 
-<a name="module_preloader..getComponentModels"></a>
-
-### preloader~getComponentModels() ⇒ <code>object</code>
+### preloader~getComponentModels() ⇒ `object`
 get component models so we can mount them on window.kiln.componentModels
 if they aren't already mounted (backwards-compatability)
 
-**Kind**: inner method of [<code>preloader</code>](#module_preloader)  
-<a name="module_preloader..getComponentKilnjs"></a>
+**Kind**: inner method of [`preloader`](#preloader)
 
-### preloader~getComponentKilnjs() ⇒ <code>object</code>
+### preloader~getComponentKilnjs() ⇒ `object`
 get component kiln files so we can mount them on window.kiln.componentKilnjs
 
-**Kind**: inner method of [<code>preloader</code>](#module_preloader)  
-<a name="module_preloader..reduceComponents"></a>
+**Kind**: inner method of [`preloader`](#preloader)
 
-### preloader~reduceComponents(result, val) ⇒ <code>obj</code>
+### preloader~reduceComponents(result, val) ⇒ `obj`
 extract component data from preloadData obj
 
-**Kind**: inner method of [<code>preloader</code>](#module_preloader)  
+**Kind**: inner method of [`preloader`](#preloader)  
 
 | Param | Type |
 | --- | --- |
-| result | <code>obj</code> | 
-| val | <code>obj</code> | 
+| result | `obj` | 
+| val | `obj` |
 
-<a name="module_preloader..composeLayoutData"></a>
-
-### preloader~composeLayoutData(layoutSchema, components, original) ⇒ <code>object</code>
+### preloader~composeLayoutData(layoutSchema, components, original) ⇒ `object`
 extract layout data from original data
 
-**Kind**: inner method of [<code>preloader</code>](#module_preloader)  
+**Kind**: inner method of [`preloader`](#preloader)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| layoutSchema | <code>object</code> | schema for layout |
-| components | <code>object</code> | key/value store of components |
-| original | <code>object</code> | original preloaded data |
+| layoutSchema | `object` | schema for layout |
+| components | `object` | key/value store of components |
+| original | `object` | original preloaded data |
 
-<a name="module_preloader..reduceTemplates"></a>
-
-### preloader~reduceTemplates(result, val, key) ⇒ <code>obj</code>
+### preloader~reduceTemplates(result, val, key) ⇒ `obj`
 make precompiled hbs templates ready for user
 
-**Kind**: inner method of [<code>preloader</code>](#module_preloader)  
+**Kind**: inner method of [`preloader`](#preloader)  
 
 | Param | Type |
 | --- | --- |
-| result | <code>obj</code> | 
-| val | <code>obj</code> | 
-| key | <code>string</code> | 
+| result | `obj` | 
+| val | `obj` | 
+| key | `string` |
 
-<a name="module_preloader..getPageStatus"></a>
-
-### preloader~getPageStatus(state) ⇒ <code>string</code>
+### preloader~getPageStatus(state) ⇒ `string`
 get string state to pass to progress bar
 
-**Kind**: inner method of [<code>preloader</code>](#module_preloader)  
+**Kind**: inner method of [`preloader`](#preloader)  
 
 | Param | Type |
 | --- | --- |
-| state | <code>object</code> | 
+| state | `object` | 
 
 <a name="module_preloader..getSchemas"></a>
 
-### preloader~getSchemas(schemas, kilnjs) ⇒ <code>object</code>
+### preloader~getSchemas(schemas, kilnjs) ⇒ `object`
 run a copy of the schema through its kiln.js file (if it has one)
 
-**Kind**: inner method of [<code>preloader</code>](#module_preloader)  
+**Kind**: inner method of [`preloader`](#preloader)  
 
 | Param | Type |
 | --- | --- |
-| schemas | <code>object</code> | 
-| kilnjs | <code>function</code> | 
-
-<a name="module_toolbar"></a>
+| schemas | `object` | 
+| kilnjs | `function` |
 
 ## toolbar
 
-* [toolbar](#module_toolbar)
-    * [.startProgress(commit, type)](#module_toolbar.startProgress)
-    * [.finishProgress(commit, type)](#module_toolbar.finishProgress)
-    * [.addAlert(store, config)](#module_toolbar.addAlert)
-    * [.removeAlert(store, config)](#module_toolbar.removeAlert)
-    * [.showSnackbar(store, config)](#module_toolbar.showSnackbar)
-
-<a name="module_toolbar.startProgress"></a>
+* [toolbar](#toolbar)
+    * [.startProgress(commit, type)](#toolbarstartprogresscommit-type)
+    * [.finishProgress(commit, type)](#toolbarfinishprogresscommit-type)
+    * [.addAlert(store, config)](#toolbaraddalertstore-config)
+    * [.removeAlert(store, config)](#toolbarremovealertstore-config)
+    * [.showSnackbar(store, config)](#toolbarshowsnackbarstore-config)
 
 ### toolbar.startProgress(commit, type)
 start progress bar. if already started, this will cause a slight pause
 before continuing the progress bar
 
-**Kind**: static method of [<code>toolbar</code>](#module_toolbar)  
+**Kind**: static method of [`toolbar`](#toolbar)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| commit | <code>function</code> |  |
-| type | <code>string</code> | e.g. 'save' or 'publish' |
-
-<a name="module_toolbar.finishProgress"></a>
+| commit | `function` |  |
+| type | `string` | e.g. 'save' or 'publish' |
 
 ### toolbar.finishProgress(commit, type)
 finish the progress bar.
 
-**Kind**: static method of [<code>toolbar</code>](#module_toolbar)  
+**Kind**: static method of [`toolbar`](#toolbar)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| commit | <code>function</code> |  |
-| type | <code>string</code> | e.g. 'save' or 'publish' |
-
-<a name="module_toolbar.addAlert"></a>
+| commit | `function` |  |
+| type | `string` | e.g. 'save' or 'publish' |
 
 ### toolbar.addAlert(store, config)
 add alert to the array
 
-**Kind**: static method of [<code>toolbar</code>](#module_toolbar)  
+**Kind**: static method of [`toolbar`](#toolbar)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| config | <code>string</code> \| <code>object</code> | the text of the alert (for info), or an object with { type, text } |
-
-<a name="module_toolbar.removeAlert"></a>
+| store | `object` |  |
+| config | `string` \ `object` | the text of the alert (for info), or an object with { type, text } |
 
 ### toolbar.removeAlert(store, config)
 remove an alert from the array, specifying the index
 
-**Kind**: static method of [<code>toolbar</code>](#module_toolbar)  
+**Kind**: static method of [`toolbar`](#toolbar)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| config | <code>number</code> \| <code>object</code> | index or an equivalent config object |
-
-<a name="module_toolbar.showSnackbar"></a>
+| store |`object` |  |
+| config | `number` \ `object` | index or an equivalent config object |
 
 ### toolbar.showSnackbar(store, config)
 trigger a new snackbar. note: this happens imperatively (toolbar handles the actual creation, by watching this value)
 note: if you want the snackbar to have an action, pass in both `action` (the text of the button) and `onActionClick` (a reference to the function you want invoked)
 
-**Kind**: static method of [<code>toolbar</code>](#module_toolbar)  
+**Kind**: static method of [`toolbar`](#toolbar)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| store | <code>object</code> |  |
-| config | <code>string</code> \| <code>object</code> | message or full config object |
-
-<a name="module_undo"></a>
+| store | `object` |  |
+| config | `string` \ `object` | message or full config object |
 
 ## undo
 
-* [undo](#module_undo)
+* [undo](#undo)
     * _static_
-        * [.createSnapshot(store)](#module_undo.createSnapshot)
-        * [.setFixedPoint(store)](#module_undo.setFixedPoint)
-        * [.undo(store)](#module_undo.undo)
-        * [.redo(store)](#module_undo.redo)
+        * [.createSnapshot(store)](#undocreatesnapshotstore)
+        * [.setFixedPoint(store)](#undosetfixedpointstore)
+        * [.undo(store)](#undoundostore)
+        * [.redo(store)](#undoredostore)
     * _inner_
-        * [~getChangedComponents(current, compare)](#module_undo..getChangedComponents) ⇒ <code>object</code>
-        * [~saveChangedComponents(changedComponents, store)](#module_undo..saveChangedComponents)
+        * [~getChangedComponents(current, compare)](#undo-getchangedcomponentscurrent-compare-object) ⇒ `object`
+        * [~saveChangedComponents(changedComponents, store)](#undo-savechangedcomponentschangedcomponents-store)
 
 <a name="module_undo.createSnapshot"></a>
 
 ### undo.createSnapshot(store)
 create snapshot. called from the plugin listening to batched renders
 
-**Kind**: static method of [<code>undo</code>](#module_undo)  
+**Kind**: static method of [`undo`](#undo)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-
-<a name="module_undo.setFixedPoint"></a>
+| store | `object` |
 
 ### undo.setFixedPoint(store)
 "You're a fixed point in time and space. You're a fact. That's never meant to happen."
 when doing a manual save from some point in history, we need to
 remove snapshots after that point (to preserve the expected undo functionality)
 
-**Kind**: static method of [<code>undo</code>](#module_undo)  
+**Kind**: static method of [`undo`](#undo)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-
-<a name="module_undo.undo"></a>
+| store | `object` |
 
 ### undo.undo(store)
 undo: sets cursor back one, re-saves affected components with old data
 
-**Kind**: static method of [<code>undo</code>](#module_undo)  
+**Kind**: static method of [`undo`](#undo)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
-
-<a name="module_undo.redo"></a>
+| store | `object` |
 
 ### undo.redo(store)
 redo: sets cursor forward one, re-saves affected components with new data
 
-**Kind**: static method of [<code>undo</code>](#module_undo)  
+**Kind**: static method of [`undo`](#undo)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
+| store | `object` |
 
-<a name="module_undo..getChangedComponents"></a>
-
-### undo~getChangedComponents(current, compare) ⇒ <code>object</code>
+### undo~getChangedComponents(current, compare) ⇒ `object`
 get changed components, used by undo and redo
 
-**Kind**: inner method of [<code>undo</code>](#module_undo)  
+**Kind**: inner method of [`undo`](#undo)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| current | <code>object</code> |  |
-| compare | <code>object</code> | (prev/next components object) |
-
-<a name="module_undo..saveChangedComponents"></a>
+| current | `object` |  |
+| compare | `object` | (prev/next components object) |
 
 ### undo~saveChangedComponents(changedComponents, store)
 render multiple components at once
 
-**Kind**: inner method of [<code>undo</code>](#module_undo)  
+**Kind**: inner method of [`undo`](#undo)  
 
 | Param | Type |
 | --- | --- |
-| changedComponents | <code>object</code> | 
-| store | <code>object</code> | 
-
-<a name="module_validators"></a>
+| changedComponents | `object` | 
+| store | `object` |
 
 ## validators
 
-* [validators](#module_validators)
+* [validators](#validators)
     * _static_
-        * [.runMetaValidator(metadata)](#module_validators.runMetaValidator) ⇒ <code>function</code>
-        * [.runMetaValidators(uri, errorValidators, warningValidators)](#module_validators.runMetaValidators) ⇒ <code>Promise</code>
-        * [.runKilnjsValidators(schemas, components)](#module_validators.runKilnjsValidators) ⇒ <code>array</code>
-        * [.getSchemasWithValidationRules(schemas)](#module_validators.getSchemasWithValidationRules) ⇒ <code>object</code>
-        * [.isMetadataError(scope, type)](#module_validators.isMetadataError) ⇒ <code>boolean</code>
-        * [.isMetadataWarning(scope, type)](#module_validators.isMetadataWarning) ⇒ <code>boolean</code>
-        * [.isGlobalMetadataError(validator)](#module_validators.isGlobalMetadataError) ⇒ <code>boolean</code>
-        * [.isGlobalMetadataWarning(validator)](#module_validators.isGlobalMetadataWarning) ⇒ <code>boolean</code>
-        * [.isSpecificMetadataWarning(validator, pageUri)](#module_validators.isSpecificMetadataWarning) ⇒ <code>boolean</code>
-        * [.isSpecificMetadataError(validator, pageUri)](#module_validators.isSpecificMetadataError) ⇒ <code>boolean</code>
-        * [.validate(store)](#module_validators.validate) ⇒ <code>Promise</code>
+        * [.runMetaValidator(metadata)](#validatorsrunmetavalidatormetadata-function) ⇒ `function`
+        * [.runMetaValidators(uri, errorValidators, warningValidators)](#validatorsrunmetavalidatorsuri-errorvalidators-warningvalidators-promise) ⇒ `Promise`
+        * [.runKilnjsValidators(schemas, components)](#validatorsrunkilnjsvalidatorsschemas-components-array) ⇒ `array`
+        * [.getSchemasWithValidationRules(schemas)](#validatorsgetschemaswithvalidationrulesschemas-object) ⇒ `object`
+        * [.isMetadataError(scope, type)](#validatorsismetadataerrorscope-type-boolean) ⇒ `boolean`
+        * [.isMetadataWarning(scope, type)](#validatorsismetadatawarningscope-type-boolean) ⇒ `boolean`
+        * [.isGlobalMetadataError(validator)](#validatorsisglobalmetadataerrorvalidator-boolean) ⇒ `boolean`
+        * [.isGlobalMetadataWarning(validator)](#validatorsisspecificmetadatawarningvalidator-pageuri-boolean) ⇒ `boolean`
+        * [.isSpecificMetadataWarning(validator, pageUri)](#validatorsisspecificmetadatawarningvalidator-pageuri-boolean) ⇒ `boolean`
+        * [.isSpecificMetadataError(validator, pageUri)](#validatorsisspecificmetadataerrorvalidator-pageuri-boolean) ⇒ `boolean`
+        * [.validate(store)](#validatorsvalidatestore-promise) ⇒ `Promise`
     * _inner_
-        * [~isComponentInPageHeadList(uri, state)](#module_validators..isComponentInPageHeadList) ⇒ <code>Boolean</code>
-        * [~runValidator(state)](#module_validators..runValidator) ⇒ <code>function</code>
-        * [~runValidators(validators, state)](#module_validators..runValidators) ⇒ <code>Promise</code>
-        * [~hasItems(error)](#module_validators..hasItems) ⇒ <code>Boolean</code>
-        * [~validKilnjsValidator(validators, validationRule)](#module_validators..validKilnjsValidator) ⇒ <code>boolean</code>
-        * [~getKilnJsFieldAndValue(validationRule, component)](#module_validators..getKilnJsFieldAndValue) ⇒ <code>object</code>
-        * [~getKilnJsError(validationError, errorItem, errors)](#module_validators..getKilnJsError) ⇒ <code>array</code>
+        * [~isComponentInPageHeadList(uri, state)](#validators-iscomponentinpageheadlisturi-state-boolean) ⇒ `Boolean`
+        * [~runValidator(state)](#validators-runvalidatorstate-function) ⇒ `function`
+        * [~runValidators(validators, state)](#validators-runvalidatorsvalidators-state-promise) ⇒ `Promise`
+        * [~hasItems(error)](#validators-hasitemserror-boolean) ⇒ `Boolean`
+        * [~validKilnjsValidator(validators, validationRule)](#validators-validkilnjsvalidatorvalidators-validationrule-boolean) ⇒ `boolean`
+        * [~getKilnJsFieldAndValue(validationRule, component)](#validators-getkilnjsfieldandvaluevalidationrule-component-object) ⇒ `object`
+        * [~getKilnJsError(validationError, errorItem, errors)](#validators-getkilnjserrorvalidationerror-erroritem-errors-array) ⇒ `array`
 
-<a name="module_validators.runMetaValidator"></a>
-
-### validators.runMetaValidator(metadata) ⇒ <code>function</code>
+### validators.runMetaValidator(metadata) ⇒ `function`
 run an metadata validator. if it returns items, add the label and description and items
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| metadata | <code>object</code> | 
+| metadata | `object` |
 
-<a name="module_validators.runMetaValidators"></a>
-
-### validators.runMetaValidators(uri, errorValidators, warningValidators) ⇒ <code>Promise</code>
+### validators.runMetaValidators(uri, errorValidators, warningValidators) ⇒ `Promise`
 run a list of validators using page metadata
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| uri | <code>uri</code> | page uri |
-| errorValidators | <code>array</code> | validators for errors |
-| warningValidators | <code>array</code> | validators for warnings |
+| uri | `uri` | page uri |
+| errorValidators | `array` | validators for errors |
+| warningValidators | `array` | validators for warnings |
 
-<a name="module_validators.runKilnjsValidators"></a>
-
-### validators.runKilnjsValidators(schemas, components) ⇒ <code>array</code>
+### validators.runKilnjsValidators(schemas, components) ⇒ `array`
 Run the kilnjsValidators
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| schemas | <code>object</code> | 
-| components | <code>object</code> | 
+| schemas | `object` | 
+| components | `object` |
 
-<a name="module_validators.getSchemasWithValidationRules"></a>
-
-### validators.getSchemasWithValidationRules(schemas) ⇒ <code>object</code>
+### validators.getSchemasWithValidationRules(schemas) ⇒ `object`
 Get the schemas that have a validation property
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| schemas | <code>object</code> | 
+| schemas | `object` |
 
-<a name="module_validators.isMetadataError"></a>
-
-### validators.isMetadataError(scope, type) ⇒ <code>boolean</code>
+### validators.isMetadataError(scope, type) ⇒ `boolean`
 Check whether is a metadata error
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| scope | <code>string</code> | 
-| type | <code>string</code> | 
+| scope | `string` | 
+| type | `string` |
 
-<a name="module_validators.isMetadataWarning"></a>
-
-### validators.isMetadataWarning(scope, type) ⇒ <code>boolean</code>
+### validators.isMetadataWarning(scope, type) ⇒ `boolean`
 Check whether is a metadata warning
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| scope | <code>string</code> | 
-| type | <code>string</code> | 
+| scope | `string` | 
+| type | `string` |
 
-<a name="module_validators.isGlobalMetadataError"></a>
-
-### validators.isGlobalMetadataError(validator) ⇒ <code>boolean</code>
+### validators.isGlobalMetadataError(validator) ⇒ `boolean`
 Check whether is a metadata error
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| validator | <code>object</code> | 
-| validator.scope | <code>string</code> | 
-| validator.type | <code>string</code> | 
-| validator.uri | <code>string</code> | 
+| validator | `object` | 
+| validator.scope | `string` | 
+| validator.type | `string` | 
+| validator.uri | `string` |
 
-<a name="module_validators.isGlobalMetadataWarning"></a>
-
-### validators.isGlobalMetadataWarning(validator) ⇒ <code>boolean</code>
+### validators.isGlobalMetadataWarning(validator) ⇒ `boolean`
 Check whether is a metadata error
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| validator | <code>object</code> | 
-| validator.scope | <code>string</code> | 
-| validator.type | <code>string</code> | 
-| validator.uri | <code>string</code> | 
+| validator | `object` | 
+| validator.scope | `string` | 
+| validator.type | `string` | 
+| validator.uri | `string` |
 
-<a name="module_validators.isSpecificMetadataWarning"></a>
-
-### validators.isSpecificMetadataWarning(validator, pageUri) ⇒ <code>boolean</code>
+### validators.isSpecificMetadataWarning(validator, pageUri) ⇒ `boolean`
 Check whether is a metadata warning for specific page
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [ `validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| validator | <code>object</code> | 
-| validator.scope | <code>string</code> | 
-| validator.type | <code>string</code> | 
-| validator.uri | <code>string</code> | 
-| pageUri | <code>string</code> | 
+| validator | `object` | 
+| validator.scope | `string` | 
+| validator.type | `string` | 
+| validator.uri | `string` | 
+| pageUri | `string` |
 
-<a name="module_validators.isSpecificMetadataError"></a>
-
-### validators.isSpecificMetadataError(validator, pageUri) ⇒ <code>boolean</code>
+### validators.isSpecificMetadataError(validator, pageUri) ⇒ `boolean`
 Check whether is a metadata error for specific page
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| validator | <code>object</code> | 
-| validator.scope | <code>string</code> | 
-| validator.type | <code>string</code> | 
-| validator.uri | <code>string</code> | 
-| pageUri | <code>string</code> | 
+| validator | `object` | 
+| validator.scope | `string` | 
+| validator.type | `string` | 
+| validator.uri | `string` | 
+| pageUri | `string` |
 
-<a name="module_validators.validate"></a>
-
-### validators.validate(store) ⇒ <code>Promise</code>
+### validators.validate(store) ⇒ `Promise`
 trigger validation
 
-**Kind**: static method of [<code>validators</code>](#module_validators)  
+**Kind**: static method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| store | <code>object</code> | 
+| store | `object` |
 
-<a name="module_validators..isComponentInPageHeadList"></a>
-
-### validators~isComponentInPageHeadList(uri, state) ⇒ <code>Boolean</code>
+### validators~isComponentInPageHeadList(uri, state) ⇒ `Boolean`
 determine if a component is in a page-specific head list
 
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
+**Kind**: inner method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| uri | <code>string</code> | 
-| state | <code>object</code> | 
+| uri | `string` | 
+| state | `object` |
 
-<a name="module_validators..runValidator"></a>
-
-### validators~runValidator(state) ⇒ <code>function</code>
+### validators~runValidator(state) ⇒ `function`
 run an individual validator. if it returns items, add the label and description
 
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
+**Kind**: inner method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| state | <code>object</code> | 
+| state | `object` |
 
-<a name="module_validators..runValidators"></a>
-
-### validators~runValidators(validators, state) ⇒ <code>Promise</code>
+### validators~runValidators(validators, state) ⇒ `Promise`
 run a list of validators
 
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
+**Kind**: inner method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| validators | <code>array</code> | 
-| state | <code>object</code> | 
+| validators | `array` | 
+| state | `object` |
 
-<a name="module_validators..hasItems"></a>
-
-### validators~hasItems(error) ⇒ <code>Boolean</code>
+### validators~hasItems(error) ⇒ `Boolean`
 make sure that all errors have items that can display.
 some may have been parsed out by the isActive check in runValidator, above
 
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
+**Kind**: inner method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| error | <code>object</code> | 
+| error | `object` |
 
-<a name="module_validators..validKilnjsValidator"></a>
-
-### validators~validKilnjsValidator(validators, validationRule) ⇒ <code>boolean</code>
+### validators~validKilnjsValidator(validators, validationRule) ⇒ `boolean`
 Check if the validationRule has the correct properties to run validation with
 
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
+**Kind**: inner method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| validators | <code>object</code> | 
-| validationRule | <code>object</code> | 
+| validators | `object` | 
+| validationRule | `object` |
 
-<a name="module_validators..getKilnJsFieldAndValue"></a>
-
-### validators~getKilnJsFieldAndValue(validationRule, component) ⇒ <code>object</code>
+### validators~getKilnJsFieldAndValue(validationRule, component) ⇒ `object`
 Get the inputs from a validationRule, either as a string or as an array
 the fieldName is the name of the input that will have the focus when the user clicks to that error from the Health Tab
 the value is what will be tested by the rule
 
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
+**Kind**: inner method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| validationRule | <code>object</code> | 
-| component | <code>object</code> | 
+| validationRule | `object` | 
+| component | `object` |
 
-<a name="module_validators..getKilnJsError"></a>
-
-### validators~getKilnJsError(validationError, errorItem, errors) ⇒ <code>array</code>
+### validators~getKilnJsError(validationError, errorItem, errors) ⇒ `array`
 Add error to Errors, either as a completely new error, or as an entry in an existing error
 
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
+**Kind**: inner method of [`validators`](#validators)  
 
 | Param | Type |
 | --- | --- |
-| validationError | <code>object</code> | 
-| errorItem | <code>object</code> | 
-| errors | <code>array</code> | 
+| validationError | `object` | 
+| errorItem | `object` | 
+| errors | `array` |
 
-<a name="isPageSpecific"></a>
-
-## isPageSpecific(uri, store) ⇒ <code>boolean</code>
+## isPageSpecific(uri, store) ⇒ `boolean`
 is uri page spectific
 
 **Kind**: global function  
 
 | Param | Type |
 | --- | --- |
-| uri | <code>string</code> | 
-| store | <code>object</code> | 
-
+| uri | `string` | 
+| store | `object` |

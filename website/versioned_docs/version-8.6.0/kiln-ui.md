@@ -1,8 +1,8 @@
 ---
-id: version-8.6.0-kiln_ui
+id: version-8.6.0-kiln-ui
 title: The Kiln UI
 sidebar_label: The Kiln UI
-original_id: kiln_ui
+original_id: kiln-ui
 ---
 
 ---
@@ -58,7 +58,7 @@ Admins are able to select a third mode where they can edit components _in the la
 Attached to every component is a component selector, which displays when the component is hovered over or clicked. Depending on the component and where it exists on the page, the selector may have these buttons:
 
 * **Info** - provides component information taken from the `_description` in the component's schema
-* **Settings** - opens the [component settings form](editing_components.md#settings-group), if it exists
+* **Settings** - opens the [component settings form](editing-components.md#settings-group), if it exists
 * **Bookmark** - allows saving a specifically-named instance that can be duplicated on other pages (if `_allowBookmarks: true` is set in the component's schema)
 * **Remove** - removes the component, if it exists in a component list
 * **Add Component** - adds a component, if the current component exists in a component list

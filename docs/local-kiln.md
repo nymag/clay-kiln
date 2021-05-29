@@ -43,4 +43,4 @@ When Vue is in Development Mode (as it will be when linking to Clay-Kiln locally
 
 The most useful section in the Vue development tools is found on the `Vuex` tab. On the left, you will see all of the actions triggered by the Clay-Kiln app. You can see when a component is saved, rendered, published, etc. and by clicking on the Action in the left column you can inspect the payload of that action at the top of the column on the right.  Also on the right, you will see the state object, which contains all of the data within the Clay-Kiln app. By exploring the actions and the state, you will get a good idea of how the app is constructed.
 
-Anyone building a [Plugin](plugins) or using [kiln.js](kilnjs) should find the information revealed on the Vuex tab to be very helpful as it will guide you on what actions you can take or subscribe to.
+Anyone building a [Plugin](plugins.md) or using [kiln.js](kilnjs.md) should find the information revealed on the Vuex tab to be very helpful as it will guide you on what actions you can take or subscribe to.

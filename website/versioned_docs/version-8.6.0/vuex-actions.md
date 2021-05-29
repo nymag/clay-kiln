@@ -1,8 +1,8 @@
 ---
-id: version-8.6.0-vuex_actions
+id: version-8.6.0-vuex-actions
 title: Vuex Actions
 sidebar_label: Vuex Actions
-original_id: vuex_actions
+original_id: vuex-actions
 ---
 ## Modules
 
@@ -87,7 +87,7 @@ note: removes from parent component OR page
 | Param | Type | Description |
 | --- | --- | --- |
 | store | <code>object</code> |  |
-| data | <code>Element</code> |{el, msg} where el is the component to delete |
+| data | <code>Element</code> | el || {el, msg} where el is the component to delete |
 
 <a name="module_component-data.removeHeadComponent"></a>
 
@@ -105,7 +105,6 @@ remove head components (from page or layout)
 
 ### component-data.addCreatedComponentsToPageArea(store, newComponents, currentURI, path, replace, number, array, boolean) ⇒ <code>Promise</code>
 add components to a page area when they have already been created
-when the page is being reverted to the published version for instance
 
 **Kind**: static method of [<code>component-data</code>](#module_component-data)  
 
@@ -265,7 +264,7 @@ replace a single component in another component's property
 <a name="module_component-data..addComponentsToPageArea"></a>
 
 ### component-data~addComponentsToPageArea(store, currentURI, path, replace, components) ⇒ <code>Promise</code>
-add one or more components to a page area
+Create components to be added to a page area (i.e. head, main, etc.)
 
 **Kind**: inner method of [<code>component-data</code>](#module_component-data)  
 
@@ -421,7 +420,7 @@ open drawer
 | Param | Type | Description |
 | --- | --- | --- |
 | store | <code>Object</code> |  |
-| nameOrConfig | <code>string</code> \ <code>object</code> | either just the tab name or a json object for deeper linking |
+| nameOrConfig | <code>string</code> \| <code>object</code> | either just the tab name or a json object for deeper linking |
 
 <a name="module_forms"></a>
 
@@ -550,8 +549,6 @@ also note: this will trigger a fetch of the updated (published) layout state
 ## lists
 <a name="module_nav"></a>
 
----
-
 ## nav
 <a name="module_nav.openNav"></a>
 
@@ -563,7 +560,7 @@ open nav tab
 | Param | Type | Description |
 | --- | --- | --- |
 | store | <code>object</code> |  |
-| nameOrConfig | <code>string</code> \ <code>object</code> | tab name, or clay menu config openNav sets the ui.currentDrawer vuex variable, this allows drawers (the right slide-in menus) as well as the "nav" (the left slide-in menu) to be deep linked to. The openNav/closeNav are functions are depreciated. Should use the openDrawer/closeDrawer/toggleDrawer actions Just leaving these here in case any legacy plugins are still calling these functions |
+| nameOrConfig | <code>string</code> \| <code>object</code> | tab name, or clay menu config openNav sets the ui.currentDrawer vuex variable, this allows drawers (the right slide-in menus) as well as the "nav" (the left slide-in menu) to be deep linked to. The openNav/closeNav are functions are depreciated. Should use the openDrawer/closeDrawer/toggleDrawer actions Just leaving these here in case any legacy plugins are still calling these functions |
 
 <a name="module_page-data"></a>
 
@@ -711,7 +708,7 @@ note: if called with a user, it adds the user (with updateTime) to the page (ins
 
 ### page-state.getListData(store, uri, [prefix]) ⇒ <code>Promise</code>
 get the list data for a specific page
-note: if the prefix is specified, this does NOT commit the data (only returns it),
+note: if prefix is specified, this does NOT commit the data (only returns it),
 allowing the preloader to use it when doing the initial preload of data
 
 **Kind**: static method of [<code>page-state</code>](#module_page-state)  
@@ -848,7 +845,7 @@ add alert to the array
 | Param | Type | Description |
 | --- | --- | --- |
 | store | <code>object</code> |  |
-| config | <code>string</code> \ <code>object</code> | the text of the alert (for info), or an object with { type, text } |
+| config | <code>string</code> \| <code>object</code> | the text of the alert (for info), or an object with { type, text } |
 
 <a name="module_toolbar.removeAlert"></a>
 
@@ -860,7 +857,7 @@ remove an alert from the array, specifying the index
 | Param | Type | Description |
 | --- | --- | --- |
 | store | <code>object</code> |  |
-| config | <code>number</code> \ <code>object</code> | index or an equivalent config object |
+| config | <code>number</code> \| <code>object</code> | index or an equivalent config object |
 
 <a name="module_toolbar.showSnackbar"></a>
 
@@ -873,7 +870,7 @@ note: if you want the snackbar to have an action, pass in both `action` (the tex
 | Param | Type | Description |
 | --- | --- | --- |
 | store | <code>object</code> |  |
-| config | <code>string</code> \ <code>object</code> | message or full config object |
+| config | <code>string</code> \| <code>object</code> | message or full config object |
 
 <a name="module_undo"></a>
 
@@ -965,20 +962,126 @@ render multiple components at once
 
 * [validators](#module_validators)
     * _static_
+        * [.runMetaValidator(metadata)](#module_validators.runMetaValidator) ⇒ <code>function</code>
+        * [.runMetaValidators(uri, errorValidators, warningValidators)](#module_validators.runMetaValidators) ⇒ <code>Promise</code>
+        * [.isMetadataError(scope, type)](#module_validators.isMetadataError) ⇒ <code>boolean</code>
+        * [.isMetadataWarning(scope, type)](#module_validators.isMetadataWarning) ⇒ <code>boolean</code>
+        * [.isGlobalMetadataError(validator)](#module_validators.isGlobalMetadataError) ⇒ <code>boolean</code>
+        * [.isGlobalMetadataWarning(validator)](#module_validators.isGlobalMetadataWarning) ⇒ <code>boolean</code>
+        * [.isSpecificMetadataWarning(validator, pageUri)](#module_validators.isSpecificMetadataWarning) ⇒ <code>boolean</code>
+        * [.isSpecificMetadataError(validator, pageUri)](#module_validators.isSpecificMetadataError) ⇒ <code>boolean</code>
         * [.validate(store)](#module_validators.validate) ⇒ <code>Promise</code>
     * _inner_
         * [~isComponentInPageHeadList(uri, state)](#module_validators..isComponentInPageHeadList) ⇒ <code>Boolean</code>
         * [~runValidator(state)](#module_validators..runValidator) ⇒ <code>function</code>
         * [~runValidators(validators, state)](#module_validators..runValidators) ⇒ <code>Promise</code>
         * [~hasItems(error)](#module_validators..hasItems) ⇒ <code>Boolean</code>
-        * [~runMetaValidator(metadata)](#module_validators..runMetaValidator) ⇒ <code>function</code>
-        * [~runMetaValidators(uri, validators)](#module_validators..runMetaValidators) ⇒ <code>Promise</code>
-        * [~isMetadataError(scope, type)](#module_validators..isMetadataError) ⇒ <code>boolean</code>
-        * [~isMetadataWarning(scope, type)](#module_validators..isMetadataWarning) ⇒ <code>boolean</code>
-        * [~isGlobalMetadataError(validator)](#module_validators..isGlobalMetadataError) ⇒ <code>boolean</code>
-        * [~isGlobalMetadataWarning(validator)](#module_validators..isGlobalMetadataWarning) ⇒ <code>boolean</code>
-        * [~isSpecificMetadataWarning(validator, pageUri)](#module_validators..isSpecificMetadataWarning) ⇒ <code>boolean</code>
-        * [~isSpecificMetadataError(validator, pageUri)](#module_validators..isSpecificMetadataError) ⇒ <code>boolean</code>
+
+<a name="module_validators.runMetaValidator"></a>
+
+### validators.runMetaValidator(metadata) ⇒ <code>function</code>
+run an metadata validator. if it returns items, add the label and description and items
+
+**Kind**: static method of [<code>validators</code>](#module_validators)  
+
+| Param | Type |
+| --- | --- |
+| metadata | <code>object</code> | 
+
+<a name="module_validators.runMetaValidators"></a>
+
+### validators.runMetaValidators(uri, errorValidators, warningValidators) ⇒ <code>Promise</code>
+run a list of validators using page metadata
+
+**Kind**: static method of [<code>validators</code>](#module_validators)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| uri | <code>uri</code> | page uri |
+| errorValidators | <code>array</code> | validators for errors |
+| warningValidators | <code>array</code> | validators for warnings |
+
+<a name="module_validators.isMetadataError"></a>
+
+### validators.isMetadataError(scope, type) ⇒ <code>boolean</code>
+Check whether is a metadata error or not
+
+**Kind**: static method of [<code>validators</code>](#module_validators)  
+
+| Param | Type |
+| --- | --- |
+| scope | <code>string</code> | 
+| type | <code>string</code> | 
+
+<a name="module_validators.isMetadataWarning"></a>
+
+### validators.isMetadataWarning(scope, type) ⇒ <code>boolean</code>
+Check whether is a metadata warning or not
+
+**Kind**: static method of [<code>validators</code>](#module_validators)  
+
+| Param | Type |
+| --- | --- |
+| scope | <code>string</code> | 
+| type | <code>string</code> | 
+
+<a name="module_validators.isGlobalMetadataError"></a>
+
+### validators.isGlobalMetadataError(validator) ⇒ <code>boolean</code>
+Check whether is a global metadata error or not
+
+**Kind**: static method of [<code>validators</code>](#module_validators)  
+
+| Param | Type |
+| --- | --- |
+| validator | <code>object</code> | 
+| validator.scope | <code>string</code> | 
+| validator.type | <code>string</code> | 
+| validator.uri | <code>string</code> | 
+
+<a name="module_validators.isGlobalMetadataWarning"></a>
+
+### validators.isGlobalMetadataWarning(validator) ⇒ <code>boolean</code>
+Check whether is a global metadata error or not
+
+**Kind**: static method of [<code>validators</code>](#module_validators)  
+
+| Param | Type |
+| --- | --- |
+| validator | <code>object</code> | 
+| validator.scope | <code>string</code> | 
+| validator.type | <code>string</code> | 
+| validator.uri | <code>string</code> | 
+
+<a name="module_validators.isSpecificMetadataWarning"></a>
+
+### validators.isSpecificMetadataWarning(validator, pageUri) ⇒ <code>boolean</code>
+Check whether is a metadata warning for specific page or not
+
+**Kind**: static method of [<code>validators</code>](#module_validators)  
+
+| Param | Type |
+| --- | --- |
+| validator | <code>object</code> | 
+| validator.scope | <code>string</code> | 
+| validator.type | <code>string</code> | 
+| validator.uri | <code>string</code> | 
+| pageUri | <code>string</code> | 
+
+<a name="module_validators.isSpecificMetadataError"></a>
+
+### validators.isSpecificMetadataError(validator, pageUri) ⇒ <code>boolean</code>
+Check whether is a metadata error for specific page or not
+
+**Kind**: static method of [<code>validators</code>](#module_validators)  
+
+| Param | Type |
+| --- | --- |
+| validator | <code>object</code> | 
+| validator.scope | <code>string</code> | 
+| validator.type | <code>string</code> | 
+| validator.uri | <code>string</code> | 
+| pageUri | <code>string</code> | 
 
 <a name="module_validators.validate"></a>
 
@@ -1006,7 +1109,7 @@ determine if a component is in a page-specific head list
 <a name="module_validators..runValidator"></a>
 
 ### validators~runValidator(state) ⇒ <code>function</code>
-run an individual validator. if it returns items, add the label and description
+run an individual validator. If it returns items, add the label and description
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
 
@@ -1029,8 +1132,8 @@ run a list of validators
 <a name="module_validators..hasItems"></a>
 
 ### validators~hasItems(error) ⇒ <code>Boolean</code>
-make sure that all errors have items that can display.
-some may have been parsed out by the isActive check in runValidator, above
+make sure that all errors have items that can display. 
+Some may have been parsed out by the isActive check in runValidator, above
 
 **Kind**: inner method of [<code>validators</code>](#module_validators)  
 
@@ -1038,107 +1141,3 @@ some may have been parsed out by the isActive check in runValidator, above
 | --- | --- |
 | error | <code>object</code> | 
 
-<a name="module_validators..runMetaValidator"></a>
-
-### validators~runMetaValidator(metadata) ⇒ <code>function</code>
-run an metadata validator. if it returns items, add the label and description and items
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
-
-| Param | Type |
-| --- | --- |
-| metadata | <code>object</code> | 
-
-<a name="module_validators..runMetaValidators"></a>
-
-### validators~runMetaValidators(uri, validators) ⇒ <code>Promise</code>
-run a list of validators using page metadata
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| uri | <code>uri</code> | uri |
-| validators | <code>array</code> |  |
-
-<a name="module_validators..isMetadataError"></a>
-
-### validators~isMetadataError(scope, type) ⇒ <code>boolean</code>
-Check whether is a metadata error
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
-
-| Param | Type |
-| --- | --- |
-| scope | <code>string</code> | 
-| type | <code>string</code> | 
-
-<a name="module_validators..isMetadataWarning"></a>
-
-### validators~isMetadataWarning(scope, type) ⇒ <code>boolean</code>
-Check whether is a metadata warning
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
-
-| Param | Type |
-| --- | --- |
-| scope | <code>string</code> | 
-| type | <code>string</code> | 
-
-<a name="module_validators..isGlobalMetadataError"></a>
-
-### validators~isGlobalMetadataError(validator) ⇒ <code>boolean</code>
-Check whether is a metadata error
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
-
-| Param | Type |
-| --- | --- |
-| validator | <code>object</code> | 
-| validator.scope | <code>string</code> | 
-| validator.type | <code>string</code> | 
-| validator.uri | <code>string</code> | 
-
-<a name="module_validators..isGlobalMetadataWarning"></a>
-
-### validators~isGlobalMetadataWarning(validator) ⇒ <code>boolean</code>
-Check whether is a metadata error
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
-
-| Param | Type |
-| --- | --- |
-| validator | <code>object</code> | 
-| validator.scope | <code>string</code> | 
-| validator.type | <code>string</code> | 
-| validator.uri | <code>string</code> | 
-
-<a name="module_validators..isSpecificMetadataWarning"></a>
-
-### validators~isSpecificMetadataWarning(validator, pageUri) ⇒ <code>boolean</code>
-Check whether is a metadata warning for a specific page
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
-
-| Param | Type |
-| --- | --- |
-| validator | <code>object</code> | 
-| validator.scope | <code>string</code> | 
-| validator.type | <code>string</code> | 
-| validator.uri | <code>string</code> | 
-| pageUri | <code>string</code> | 
-
-<a name="module_validators..isSpecificMetadataError"></a>
-
-### validators~isSpecificMetadataError(validator, pageUri) ⇒ <code>boolean</code>
-Check whether is a metadata error for specific page
-
-**Kind**: inner method of [<code>validators</code>](#module_validators)  
-
-| Param | Type |
-| --- | --- |
-| validator | <code>object</code> | 
-| validator.scope | <code>string</code> | 
-| validator.type | <code>string</code> | 
-| validator.uri | <code>string</code> | 
-| pageUri | <code>string</code> | 
