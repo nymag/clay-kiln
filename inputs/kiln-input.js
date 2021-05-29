@@ -1,14 +1,14 @@
-import store from '../lib/core-data/store';
-import * as api from '../lib/core-data/api.js';
 import { replaceVersion } from 'clayutils';
 import _cloneDeep from 'lodash/cloneDeep';
+import store from '../lib/core-data/store';
+import * as api from '../lib/core-data/api';
 import { addProtocol } from '../lib/utils/urls';
 
 export default class KilnInput {
   /**
-  * @param {object} schema
-  * @param {string} inputName
-  */
+   * @param {object} schema
+   * @param {string} inputName
+   */
   constructor(schema, inputName) {
     Object.assign(this, {
       inputName,
@@ -17,16 +17,17 @@ export default class KilnInput {
       cachedResponses: {},
       ...schema[inputName]
     });
-  };
+  }
 
   /**
-   * Runs an Fetch call and returns a promise with the response or if cached, returns a stored promise without making another call
-  * @param {string} url
-  * @param {object} options - fetch config options (headers, etc.)
-  * @param {boolean} cache
-  * @param {number} timeOutIn
-  * @return {Promise}
-  */
+   * Runs an Fetch call and returns a promise with the response or if cached,
+   * returns a stored promise without making another call
+   * @param {string} url
+   * @param {object} options - fetch config options (headers, etc.)
+   * @param {boolean} cache
+   * @param {number} timeOutIn
+   * @return {Promise}
+   */
   fetch(url, options = {}, cache = true, timeOutIn = 5000) {
     const controller = new AbortController(),
       config = { ...options, signal: controller.signal };
@@ -68,9 +69,9 @@ export default class KilnInput {
 
   /**
    * fetchs and returns a component as a json object
-  * @param {string} uri
-  * @return {Promise}
-  */
+   * @param {string} uri
+   * @return {Promise}
+   */
   getComponentData(uri) {
     const url = addProtocol(uri);
 
@@ -79,11 +80,11 @@ export default class KilnInput {
 
   /**
    * returns an array of components with the passed name on the current page
-  * @param {string} componentName
-  * @return {array}
-  */
+   * @param {string} componentName
+   * @return {array}
+   */
   getComponentInstances(componentName) {
-    const components = store.state.components,
+    const { components } = store.state,
       instances = [];
 
     Object.keys(components).forEach((key) => {
@@ -96,54 +97,48 @@ export default class KilnInput {
   }
 
   /**
-  * returns a copy of the current Vuex state
-  * @return {object}
-  */
+   * returns a copy of the current Vuex state
+   * @return {object}
+   */
   getState() {
     return _cloneDeep(store.state);
   }
 
   /**
-  * register an event
-  * @param {string} event
-  * @param {function} fn
-  */
+   * register an event
+   * @param {string} event
+   * @param {function} fn
+   */
   on(event, fn) {
     this.events = this.events || {};
     this.events[event] = fn;
   }
 
   /**
-  * hide the input
-  * @returns {promise}
-  */
+   * hide the input
+   * @returns {promise}
+   */
   hide() {
-    return new Promise((resolve) => {
-      if (store.state.schemas[this.schemaName]) {
-        return this.setProp('visibility', false);
-      } else {
-        this.visibility = false;
-        resolve(this);
-      }
-    });
+    // just an alias/shortcut for calling setProp('visibility', false);
+    return this.setProp('visibility', false);
   }
 
   /**
-  * publish a component by saving to the @published version
-  * @param {string} uri
-  * @param {object} data
-  * @returns {promise}
-  */
+   * publish a component by saving to the @published version
+   * @param {string} uri
+   * @param {object} data
+   * @returns {promise}
+   */
   publishComponent(uri, data) {
     return this.saveComponent(replaceVersion(uri, 'published'), data);
   }
 
   /**
-  * re-render a component instance
-  * useful if a component's data has been updated by an outside source
-  * @param {string} uri
-  * @returns {promise}
-  */
+   * re-render a component instance
+   * useful if a component's data has been updated by an outside source
+   * @param {string} uri
+   * @returns {promise}
+   */
   reRenderInstance(uri) {
     return api.getJSON(`http://${uri}`).then((component) => {
       store.dispatch('triggerModelRender', { uri, component });
@@ -151,40 +146,43 @@ export default class KilnInput {
   }
 
   /**
-  * save a component
-  * @param {string} uri
-  * @param {object} data
-  * @returns {promise}
-  */
+   * save a component
+   * @param {string} uri
+   * @param {object} data
+   * @returns {promise}
+   */
   saveComponent(uri, data) {
     return store.dispatch('saveComponent', { uri, data });
   }
 
   /**
-  * update the value of a prop on the current schema
-  * @param {string} prop
-  * @param {string|number|object} value
-  * @returns {promise}
-  */
+   * update the value of a prop on the current schema
+   * @param {string} prop
+   * @param {string|number|object} value
+   * @returns {promise}
+   */
   setProp(prop, value) {
     return new Promise((resolve) => {
-      if (this[prop] !== value) {
-        store.dispatch('updateSchemaProp', {
-          schemaName: this.schemaName, inputName: this.inputName, prop, value
-        })
-          .then(() => {
-            resolve(this);
-          });
-      } else {
-        resolve(this);
+      if (store.state.schemas[this.schemaName]) {
+        if (this[prop] !== value) {
+          return store.dispatch('updateSchemaProp', {
+            schemaName: this.schemaName, inputName: this.inputName, prop, value
+          }).then(() => resolve(this));
+        }
+
+        return resolve(this);
       }
+
+      this[prop] = value;
+
+      return resolve(this);
     });
   }
 
   /**
-  * show the input
-  * @returns {promise}
-  */
+   * show the input
+   * @returns {promise}
+   */
   show() {
     // just an alias/shortcut for calling setProp('visibility', true);
     return this.setProp('visibility', true);
@@ -204,11 +202,11 @@ export default class KilnInput {
 
 
   /**
-  * save a component
-  * @param {string} event
-  * @param {function} fn
-  * @param {boolean} scoped
-  */
+   * save a component
+   * @param {string} event
+   * @param {function} fn
+   * @param {boolean} scoped
+   */
   subscribe(event, fn, scoped = false) {
     this.subscribedEvents[event] = {
       func: fn,
@@ -219,8 +217,8 @@ export default class KilnInput {
   }
 
   /**
-  * subscribe to vuex mutations
-  */
+   * subscribe to vuex mutations
+   */
   subscribeToMutations() {
     if (this.unsubscribe) {
       this.unsubscribe();
@@ -234,10 +232,10 @@ export default class KilnInput {
   }
 
   /**
-  * check if this event is subscribed to
-  * @param {type} string
-  * @return {boolean}
-  */
+   * check if this event is subscribed to
+   * @param {type} string
+   * @return {boolean}
+   */
   subscribedToEvent({ type }) {
     const event = this.subscribedEvents[type];
 
@@ -245,27 +243,25 @@ export default class KilnInput {
   }
 
   /**
-  * get the vuex url object, which contains the hash elements
-  * @return {object}
-  */
+   * get the vuex url object, which contains the hash elements
+   * @return {object}
+   */
   url() {
     // JSONing out the Vue object into a standard JavaScript object
     return JSON.parse(JSON.stringify(store.state.url));
   }
 
   /**
-  * Get or set the value for the input
-  * @param {string|number|object|array} val
-  * @return {string|number|object|array}
-  */
+   * Get or set the value for the input
+   * @param {string|number|object|array} val
+   * @return {string|number|object|array}
+   */
   value(val) {
     if (val != null) {
       // set the value of the field
-      return store.dispatch('updateFormData', { path: this.inputName, val }).then(() => {
-        return store.state.ui.currentForm ? store.state.ui.currentForm.fields[this.inputName] : null;
-      });
-    } else {
-      return store.state.ui.currentForm ? store.state.ui.currentForm.fields[this.inputName] : null;
+      return store.dispatch('updateFormData', { path: this.inputName, val }).then(() => (store.state.ui.currentForm ? store.state.ui.currentForm.fields[this.inputName] : null));
     }
+
+    return store.state.ui.currentForm ? store.state.ui.currentForm.fields[this.inputName] : null;
   }
-};
+}
