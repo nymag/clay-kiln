@@ -169,8 +169,8 @@
           }
 
           return {
-            [this.valueKey]: this.equalLabelValueKeys ? option[label] : option[this.valueKey],
-            [label]: option[label]
+            ...option, // spread the whole object in case it has extra properties
+            [this.valueKey]: this.equalLabelValueKeys ? option[label] : option[this.valueKey]
           };
         });
 
