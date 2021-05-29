@@ -45,6 +45,7 @@
   import isYesterday from 'date-fns/is_yesterday';
   import isThisYear from 'date-fns/is_this_year';
   import person from '../utils/person.vue';
+  import { getUsersData } from '../utils/users';
   import UiButton from 'keen/UiButton';
 
   /**
@@ -78,12 +79,25 @@
     },
     computed: {
       contributors() {
-        return _.map(_.cloneDeep(_.get(this.$store, 'state.page.state.users', [])), (user) => {
+        return this.users.map(user => {
           user.formattedTime = formatStatusTime(user.updateTime);
-  
+
           return user;
         }).reverse();
       }
+    },
+    data() {
+      return {
+        users: []
+      };
+    },
+    mounted() {
+      const usersIds = _.uniq(_.map(_.cloneDeep(_.get(this.$store, 'state.page.state.users')), user => user.id));
+
+      return getUsersData(usersIds)
+        .then(usersData => {
+          this.users = usersData;
+        });
     },
     methods: {
       addContributor() {

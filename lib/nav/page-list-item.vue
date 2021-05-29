@@ -302,7 +302,9 @@
         return this.page.title ? _.truncate(this.page.title, { length: 75 }) : 'No Title';
       },
       users() {
-        return _.take(this.page.users, 4);
+        const pageUsersData = _.flatMap(this.page.users, user => _.filter(_.get(this.$store, 'state.users'), cacheUser => cacheUser.id === user.id));
+
+        return _.take(pageUsersData, 4);
       }
     },
     methods: {

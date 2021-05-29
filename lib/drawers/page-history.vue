@@ -107,52 +107,12 @@
 
 <script>
   import _ from 'lodash';
-  import isValidDate from 'date-fns/is_valid';
-  import dateFormat from 'date-fns/format';
-  import isToday from 'date-fns/is_today';
-  import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
-  import isTomorrow from 'date-fns/is_tomorrow';
-  import isYesterday from 'date-fns/is_yesterday';
-  import isThisYear from 'date-fns/is_this_year';
   import avatar from '../utils/avatar.vue';
   import UiButton from 'keen/UiButton';
   import store from '../core-data/store';
   import { pageUri } from '@nymag/dom';
-
-  /**
-   * format time for pages
-   * @param  {Date} date
-   * @return {string}
-   */
-  function formatStatusTime(date) {
-    date = date ? new Date(date) : null;
-
-    if (!date || !isValidDate(date)) {
-      return null;
-    }
-
-    if (isToday(date)) {
-      return distanceInWordsToNow(date, { includeSeconds: false, addSuffix: true });
-    } else if (isTomorrow(date)) {
-      return 'Tomorrow';
-    } else if (isYesterday(date)) {
-      return 'Yesterday';
-    } else if (isThisYear(date)) {
-      return dateFormat(date, 'M/D');
-    } else {
-      return dateFormat(date, 'M/D/YY');
-    }
-  }
-
-  function addEd(word) {
-    if (!word.length) {
-      return word;
-    } else if (word[word.length - 1] === 'e') {
-      return `${word}d`;
-    } else {
-      return `${word}ed`;
-    }
-  }
+  import { getUsersData } from '../utils/users';
+  import { formatHistoryToDisplay } from '../utils/history';
 
   export default {
     data() {
@@ -160,33 +120,22 @@
     },
     computed: {
       history() {
-        let history = _.map(_.cloneDeep(_.get(this.$store, 'state.page.state.history', [])), (event) => {
-          event.formattedTime = formatStatusTime(event.timestamp);
-          event.formattedAction = addEd(event.action);
-          // event.formattedUsers = 'By ' + event.users.map((user) => user.name || user.username).join(', ');
-          if (event.users.length > 0) {
-            event.avatar = {
-              name: event.users.slice(-1)[0].name || event.users.slice(-1)[0].username,
-              imageUrl: event.users.slice(-1)[0].imageUrl,
-              stacked: event.users.length > 1
-            };
-          } else {
-            event.avatar = {};
-          }
+        const pageHistory = _.cloneDeep(_.get(this.$store, 'state.page.state.history', [])),
+          cacheUsers = _.get(this.$store, 'state.users'),
+          formattedHistory = formatHistoryToDisplay(pageHistory, cacheUsers);
 
-          return event;
-        }).reverse();
-
-        // remove unschedule events created by the clay robot
-        history = history.filter(event => !(event.action === 'unschedule' && _.find(event.users, user => user.username === 'robot' && user.provider === 'clay')));
-
-        return history;
+        return formattedHistory;
       }
     },
-    mounted: function () {
-      store.dispatch('getListData', { uri: pageUri() });
-    },
-    methods: {
+    mounted() {
+      const usersIds = _.uniq(_.flatMap(_.get(this.$store, 'state.page.state.history'), history => _.map(history.users, user => user.id)));
+
+      return getUsersData(usersIds)
+        .then((usersData) => {
+          this.$store.dispatch('saveUsers', usersData);
+
+          store.dispatch('getListData', { uri: pageUri() });
+        });
     },
     components: {
       UiButton,
